@@ -1,0 +1,99 @@
+.reservation-page {
+    padding-top: var(--nav-height);
+}
+
+.reservation-content {
+    padding: 40px 0 100px;
+}
+
+.reservation-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 48px;
+    align-items: start;
+}
+
+.reservation-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 40px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.btn-full {
+    width: 100%;
+    padding: 14px;
+    font-size: 1rem;
+}
+
+/* Success Card */
+.success-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+    border-radius: 16px;
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.success-card h3 {
+    margin-bottom: 12px;
+    color: var(--success);
+}
+
+.success-card p {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+/* Info Cards */
+.reservation-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.info-card h3 {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.info-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .reservation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-form {
+        padding: 24px;
+    }
+}
