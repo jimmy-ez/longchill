@@ -3,69 +3,142 @@
 }
 
 .page-header {
-    padding: 80px 0 40px;
+    padding: 80px 0 10px;
     background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
 }
 
-/* Category */
-.menu-category {
-    margin-bottom: 64px;
-}
-
-.category-title {
-    font-family: var(--font-heading);
-    font-size: 1.6rem;
-    color: var(--amber);
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-subtle);
-    margin-bottom: 24px;
-}
-
-.menu-items-grid {
+.menu-slider-container {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
-/* Menu Item */
-.menu-item-card {
+/* Tabs */
+.tabs-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 24px;
-    padding: 20px 16px;
-    border-radius: 8px;
-    transition: background var(--transition-fast);
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
 }
 
-.menu-item-card:hover {
-    background: var(--bg-card);
-}
-
-.menu-item-info {
-    flex: 1;
-}
-
-.menu-item-name {
-    font-family: var(--font-heading);
+.tab-button {
+    padding: 12px 32px;
     font-size: 1.1rem;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    font-weight: 500;
-}
-
-.menu-item-desc {
-    color: var(--text-secondary);
-    font-size: 0.85rem;
-    line-height: 1.5;
-}
-
-.menu-item-price {
     font-family: var(--font-heading);
-    font-size: 1.15rem;
-    color: var(--amber);
+    background: transparent;
+    border: 2px solid var(--border-subtle);
+    color: var(--text-secondary);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.tab-button.active {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--bg-primary);
     font-weight: 600;
-    white-space: nowrap;
+}
+
+.tab-button:hover:not(.active) {
+    border-color: var(--amber);
+    color: var(--amber);
+}
+
+/* Slider Overhaul */
+.slider-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 0;
+}
+
+.slider-content {
+    flex: 1;
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-card);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.02);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.slider-control {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.slider-control:hover {
+    background: var(--amber);
+    color: var(--bg-primary);
+    border-color: var(--amber);
+}
+
+/* Dots */
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-subtle);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    padding: 0;
+}
+
+.dot.active {
+    background: var(--amber);
+    width: 24px;
+    border-radius: 5px;
 }
 
 /* Empty State */
@@ -91,6 +164,46 @@
 
 @media (max-width: 768px) {
     .page-header {
-        padding: 60px 0 30px;
+        padding: 24px 0 16px;
+    }
+
+    .menu-content {
+        padding: 16px 0 80px;
+    }
+
+    .tabs-container {
+        margin-bottom: 24px;
+    }
+
+    .slider-wrapper {
+        gap: 0;
+    }
+
+    .slider-content {
+        max-width: 100%;
+        border-radius: 8px;
+    }
+
+    /* Absolute position controls over the image on mobile to save horizontal space */
+    .slider-control {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 40px;
+        opacity: 0.85;
+    }
+
+    .slider-control.prev {
+        left: 8px;
+    }
+
+    .slider-control.next {
+        right: 8px;
+    }
+
+    .tab-button {
+        padding: 8px 24px;
+        font-size: 0.95rem;
     }
 }
