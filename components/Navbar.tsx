@@ -36,18 +36,29 @@ export default function Navbar() {
         { href: "/contact", label: "ติดต่อเรา" },
     ];
 
+    const showBackBtn = ["/reservation", "/menu", "/history", "/contact"].includes(pathname);
+
     return (
         <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>
             <div className="navbar-inner container">
-                <Link href="/" className="navbar-logo">
-                    <Image
-                        src="/logo-white.png"
-                        alt="Longchill"
-                        width={140}
-                        height={50}
-                        priority
-                    />
-                </Link>
+                <div className="navbar-left">
+                    {showBackBtn && (
+                        <Link href="/" className="navbar-back" aria-label="กลับหน้าแรก">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </Link>
+                    )}
+                    <Link href="/" className="navbar-logo">
+                        <Image
+                            src="/logo-white.png"
+                            alt="Longchill"
+                            width={140}
+                            height={50}
+                            priority
+                        />
+                    </Link>
+                </div>
 
                 <div className={`navbar-links ${isOpen ? "navbar-links-open" : ""}`}>
                     {navLinks.map((link) => (
