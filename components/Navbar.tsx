@@ -29,8 +29,11 @@ export default function Navbar() {
     }, [pathname]);
 
     const navLinks = [
-        { href: "/contact", label: "ติดต่อเรา" },
+        { href: "/", label: "หน้าแรก" },
+        { href: "/menu", label: "รายการอาหาร" },
+        { href: "/reservation", label: "จองโต๊ะล่วงหน้า" },
         { href: "/history", label: "รายการจองของฉัน" },
+        { href: "/contact", label: "ติดต่อเรา" },
     ];
 
     return (
@@ -88,7 +91,7 @@ export default function Navbar() {
                 </div>
 
                 <button
-                    className="navbar-toggle show-mobile"
+                    className="navbar-toggle"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label="Toggle menu"
                 >

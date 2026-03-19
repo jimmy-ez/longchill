@@ -65,9 +65,9 @@ export default async function HistoryPage() {
                 ) : (
                     <ul className="history-list">
                         {reservations.map((res: any, index: number) => (
-                            <li 
-                                key={res.id} 
-                                className="history-card animate-fade-in-up" 
+                            <li
+                                key={res.id}
+                                className="history-card animate-fade-in-up"
                                 style={{ animationDelay: `${index * 0.05}s` }}
                             >
                                 <div className="card-header">
