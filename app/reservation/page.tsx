@@ -20,16 +20,34 @@ export default function ReservationPage() {
     const [errorMsg, setErrorMsg] = useState("");
 
     // Pre-fill name if logged in
+    const [hasPrefilled, setHasPrefilled] = useState(false);
     useEffect(() => {
-        if (session?.user?.name && !formData.customer_name) {
-            setFormData(prev => ({ ...prev, customer_name: session?.user?.name || "" }));
+        if (session?.user?.name && !hasPrefilled) {
+            setFormData(prev => ({ ...prev, customer_name: session.user!.name || "" }));
+            setHasPrefilled(true);
         }
-    }, [session, formData.customer_name]);
+    }, [session, hasPrefilled]);
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => {
         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    };
+
+    const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const cleaned = e.target.value.replace(/\D/g, "");
+        let formatted = cleaned;
+        if (cleaned.length > 3 && cleaned.length <= 6) {
+            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+        } else if (cleaned.length > 6) {
+            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+        }
+        setFormData((prev) => ({ ...prev, phone: formatted }));
+    };
+
+    const handlePartySizeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = e.target.value.replace(/\D/g, "");
+        setFormData((prev) => ({ ...prev, party_size: val }));
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -126,67 +144,63 @@ export default function ReservationPage() {
                                 className="form-input"
                                 placeholder="08X-XXX-XXXX"
                                 value={formData.phone}
-                                onChange={handleChange}
+                                onChange={handlePhoneChange}
+                                maxLength={12}
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                 required
                             />
                         </div>
 
-                        <div className="res-form-row">
-                            <div className="res-form-group">
-                                <label htmlFor="party_size">จำนวน (คน)</label>
-                                <select
-                                    id="party_size"
-                                    name="party_size"
-                                    className="form-input"
-                                    value={formData.party_size}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20].map((n) => (
-                                        <option key={n} value={n}>
-                                            {n} ท่าน
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                        <div className="res-form-group">
+                            <label htmlFor="party_size">จำนวน (คน)</label>
+                            <input
+                                id="party_size"
+                                name="party_size"
+                                type="text"
+                                inputMode="numeric"
+                                className="form-input"
+                                placeholder="ตัวอย่าง: 2"
+                                value={formData.party_size}
+                                onChange={handlePartySizeChange}
+                                required
+                            />
                         </div>
 
-                        <div className="res-form-row">
-                            <div className="res-form-group">
-                                <label htmlFor="date">วันที่จอง</label>
-                                <input
-                                    id="date"
-                                    name="date"
-                                    type="date"
-                                    className="form-input"
-                                    min={today}
-                                    value={formData.date}
-                                    onChange={handleChange}
-                                    required
-                                />
-                            </div>
-                            <div className="res-form-group">
-                                <label htmlFor="time">เวลามารับโต๊ะ</label>
-                                <select
-                                    id="time"
-                                    name="time"
-                                    className="form-input"
-                                    value={formData.time}
-                                    onChange={handleChange}
-                                    required
-                                >
-                                    <option value="" disabled>เลือกเวลา</option>
-                                    {[
-                                        "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
-                                        "20:00", "20:30", "21:00", "21:30", "22:00", "22:30",
-                                        "23:00", "23:30",
-                                    ].map((t) => (
-                                        <option key={t} value={t}>
-                                            {t} น.
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
+                        <div className="res-form-group">
+                            <label htmlFor="date">วันที่จอง</label>
+                            <input
+                                id="date"
+                                name="date"
+                                type="date"
+                                className="form-input"
+                                min={today}
+                                value={formData.date}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        
+                        <div className="res-form-group">
+                            <label htmlFor="time">เวลามารับโต๊ะ</label>
+                            <select
+                                id="time"
+                                name="time"
+                                className="form-input"
+                                value={formData.time}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled>เลือกเวลา</option>
+                                {[
+                                    "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
+                                    "20:00", "20:30", "21:00", "21:30", "22:00", "22:30",
+                                    "23:00", "23:30",
+                                ].map((t) => (
+                                    <option key={t} value={t}>
+                                        {t} น.
+                                    </option>
+                                ))}
+                            </select>
                         </div>
 
                         <button
