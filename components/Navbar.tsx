@@ -10,7 +10,7 @@ import "./Navbar.css";
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [user, setUser] = useState<unknown>(null);
+    const [user, setUser] = useState<any>(null);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -23,9 +23,16 @@ export default function Navbar() {
 
     useEffect(() => {
         const supabase = createClient();
+        
         supabase.auth.getUser().then(({ data }) => {
             setUser(data.user);
         });
+
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+            setUser(session?.user || null);
+        });
+
+        return () => subscription.unsubscribe();
     }, []);
 
     useEffect(() => {
@@ -63,14 +70,22 @@ export default function Navbar() {
                             {link.label}
                         </Link>
                     ))}
+
                     <div className="navbar-actions">
                         {user ? (
-                            <Link href="/admin" className="btn btn-primary btn-sm">
-                                Dashboard
-                            </Link>
+                            <button 
+                                onClick={async () => {
+                                    const supabase = createClient();
+                                    await supabase.auth.signOut();
+                                    setUser(null);
+                                }}
+                                className="btn btn-secondary btn-sm"
+                            >
+                                ออกจากระบบ
+                            </button>
                         ) : (
-                            <Link href="/login" className="btn btn-secondary btn-sm">
-                                Login
+                            <Link href="/login" className="btn btn-primary btn-sm">
+                                เข้าสู่ระบบ
                             </Link>
                         )}
                     </div>

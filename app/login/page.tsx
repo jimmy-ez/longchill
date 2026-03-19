@@ -1,109 +1,103 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase/client";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import "./page.css";
 
 export default function LoginPage() {
+    const [isLoading, setIsLoading] = useState<string | null>(null);
+    const supabase = createClient();
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
-    const [errorMsg, setErrorMsg] = useState("");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus("loading");
-        setErrorMsg("");
+    const handleLogin = async (provider: string) => {
+        setIsLoading(provider);
+        const { error } = await supabase.auth.signInWithOAuth({
+            provider: provider as any,
+            options: {
+                redirectTo: `${window.location.origin}/auth/callback?next=/reservation`,
+            },
+        });
 
-        try {
-            const supabase = createClient();
-            const { error } = await supabase.auth.signInWithPassword({
-                email,
-                password,
-            });
-
-            if (error) throw error;
-
-            router.push("/admin");
-            router.refresh();
-        } catch (err: unknown) {
-            setStatus("error");
-            setErrorMsg(
-                err instanceof Error ? err.message : "Invalid email or password."
-            );
+        if (error) {
+            console.error(error);
+            setIsLoading(null);
+            // Optionally set error state here
         }
     };
 
     return (
-        <div className="auth-page">
-            <div className="auth-card animate-fade-in-up">
-                <div className="auth-logo">
+        <div className="login-container">
+            <div className="login-card animate-fade-in-up">
+                <Link href="/" className="login-logo-link">
                     <Image
                         src="/logo-white.png"
                         alt="Longchill"
-                        width={160}
-                        height={56}
+                        width={200}
+                        height={70}
+                        priority
                     />
+                </Link>
+                <div className="login-header">
+                    <h1>เข้าสู่ระบบ</h1>
+                    <p>เพื่อดำเนินการจองโต๊ะล่วงหน้าและรับสิทธิพิเศษต่างๆ</p>
                 </div>
-                <h1>Welcome Back</h1>
-                <p className="auth-subtitle">Sign in to your admin dashboard</p>
 
-                {status === "error" && (
-                    <div className="alert alert-error">{errorMsg}</div>
-                )}
-
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="email">Email</label>
-                        <input
-                            id="email"
-                            type="email"
-                            className="form-input"
-                            placeholder="admin@longchill.com"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className="form-group">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            id="password"
-                            type="password"
-                            className="form-input"
-                            placeholder="••••••••"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-                    </div>
-
+                <div className="social-login-grid">
                     <button
-                        type="submit"
-                        className="btn btn-primary btn-full"
-                        disabled={status === "loading"}
+                        className="social-btn line-btn"
+                        onClick={() => handleLogin('line')}
+                        disabled={isLoading !== null}
                     >
-                        {status === "loading" ? (
-                            <>
-                                <span className="spinner"></span> Signing in...
-                            </>
+                        {isLoading === 'line' ? (
+                            <span className="spinner small"></span>
                         ) : (
-                            "Sign In"
+                            <>
+                                <span className="social-icon">💬</span>
+                                ดำเนินการต่อด้วย LINE
+                            </>
                         )}
                     </button>
-                </form>
 
-                <p className="auth-footer">
-                    Don&apos;t have an account?{" "}
-                    <Link href="/register" className="auth-link">
-                        Register
+                    <button
+                        className="social-btn facebook-btn"
+                        onClick={() => handleLogin('facebook')}
+                        disabled={isLoading !== null}
+                    >
+                        {isLoading === 'facebook' ? (
+                            <span className="spinner small"></span>
+                        ) : (
+                            <>
+                                <span className="social-icon">f</span>
+                                ดำเนินการต่อด้วย Facebook
+                            </>
+                        )}
+                    </button>
+
+                    <button
+                        className="social-btn google-btn"
+                        onClick={() => handleLogin('google')}
+                        disabled={isLoading !== null}
+                    >
+                        {isLoading === 'google' ? (
+                            <span className="spinner small login-spinner-dark"></span>
+                        ) : (
+                            <>
+                                <span className="social-icon">G</span>
+                                ดำเนินการต่อด้วย Google
+                            </>
+                        )}
+                    </button>
+                </div>
+
+                <div className="login-footer">
+                    <p>การเข้าสู่ระบบเป็นการยอมรับเงื่อนไขและนโยบายความเป็นส่วนตัวของเรา</p>
+                    <Link href="/" className="back-link">
+                        กลับสู่หน้าแรก
                     </Link>
-                </p>
+                </div>
             </div>
         </div>
     );
