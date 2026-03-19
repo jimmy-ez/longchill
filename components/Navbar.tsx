@@ -32,8 +32,7 @@ export default function Navbar() {
         { href: "/", label: "หน้าแรก" },
         { href: "/menu", label: "รายการอาหาร" },
         { href: "/reservation", label: "จองโต๊ะล่วงหน้า" },
-        { href: "/history", label: "รายการจองของฉัน" },
-        { href: "/contact", label: "ติดต่อเรา" },
+        ...(session?.user ? [{ href: "/history", label: "รายการจองของฉัน" }] : []),
     ];
 
     const showBackBtn = ["/reservation", "/menu", "/history", "/contact"].includes(pathname);

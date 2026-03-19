@@ -13,7 +13,6 @@ export default function Footer() {
                             <li><Link href="/">หน้าแรก</Link></li>
                             <li><Link href="/menu">รายการอาหาร</Link></li>
                             <li><Link href="/reservation">จองโต๊ะล่วงหน้า</Link></li>
-                            <li><Link href="/contact">ติดต่อเรา</Link></li>
                         </ul>
                     </div>
 

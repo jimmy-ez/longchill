@@ -46,7 +46,7 @@ export default function Home() {
               <h3>รายการอาหาร</h3>
             </Link>
 
-            <a href="https://maps.apple.com/?q=13.676609,100.609426" target="_blank" rel="noopener noreferrer" className="action-card small animate-fade-in-up">
+            <a href="https://share.google/s8apeow460rh3IEF9" target="_blank" rel="noopener noreferrer" className="action-card small animate-fade-in-up">
               <div className="action-icon">📍</div>
               <h3>โลเคชั่น</h3>
             </a>
