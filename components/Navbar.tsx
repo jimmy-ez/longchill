@@ -33,10 +33,10 @@ export default function Navbar() {
     }, [pathname]);
 
     const navLinks = [
-        { href: "/", label: "Home" },
-        { href: "/menu", label: "Menu" },
-        { href: "/reservation", label: "Reservation" },
-        { href: "/contact", label: "Contact" },
+        { href: "/", label: "หน้าแรก" },
+        { href: "/menu", label: "รายการอาหาร" },
+        { href: "/reservation", label: "จองโต๊ะล่วงหน้า" },
+        { href: "/contact", label: "ติดต่อเรา" },
     ];
 
     return (

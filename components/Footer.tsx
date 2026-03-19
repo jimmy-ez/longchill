@@ -21,16 +21,12 @@ export default function Footer() {
                         <h4>เวลาเปิดบริการ</h4>
                         <ul className="hours-list">
                             <li>
-                                <span>Monday – Thursday</span>
+                                <span>จันทร์ - ศุกร์</span>
                                 <span>17:00 – 00:00</span>
                             </li>
                             <li>
-                                <span>Friday – Saturday</span>
+                                <span>เสาร์ - อาทิตย์</span>
                                 <span>17:00 – 02:00</span>
-                            </li>
-                            <li>
-                                <span>Sunday</span>
-                                <span>17:00 – 23:00</span>
                             </li>
                         </ul>
                     </div>
