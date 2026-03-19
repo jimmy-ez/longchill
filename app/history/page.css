@@ -1,0 +1,140 @@
+.mobile-layout {
+    min-height: 100vh;
+    padding-top: calc(var(--nav-height) + 20px);
+    padding-bottom: 80px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.history-header {
+    text-align: center;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.history-header h2 {
+    font-size: 2rem;
+    color: var(--amber);
+    margin-bottom: 8px;
+}
+
+.history-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.history-content {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 20px;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}
+
+.history-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+}
+
+.history-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(12px);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 193, 7, 0.3);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 12px;
+}
+
+.res-date {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.res-status {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+.status-pending {
+    background: rgba(255, 193, 7, 0.15);
+    color: #ffc107;
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.status-confirmed {
+    background: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.status-cancelled {
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.detail-row .label {
+    color: var(--text-secondary);
+}
+
+.detail-row .value {
+    color: var(--text-primary);
+    font-weight: 500;
+}

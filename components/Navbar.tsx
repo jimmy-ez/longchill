@@ -29,10 +29,8 @@ export default function Navbar() {
     }, [pathname]);
 
     const navLinks = [
-        { href: "/", label: "หน้าแรก" },
-        { href: "/menu", label: "รายการอาหาร" },
-        { href: "/reservation", label: "จองโต๊ะล่วงหน้า" },
         { href: "/contact", label: "ติดต่อเรา" },
+        { href: "/history", label: "รายการจองของฉัน" },
     ];
 
     return (
@@ -64,17 +62,17 @@ export default function Navbar() {
                         {session?.user ? (
                             <div className="user-profile">
                                 {session.user.image && (
-                                    <Image 
-                                        src={session.user.image} 
-                                        alt={session.user.name || "User"} 
-                                        width={32} 
-                                        height={32} 
+                                    <Image
+                                        src={session.user.image}
+                                        alt={session.user.name || "User"}
+                                        width={32}
+                                        height={32}
                                         className="user-avatar"
                                         unoptimized
                                     />
                                 )}
                                 <span className="user-name">{session.user.name}</span>
-                                <button 
+                                <button
                                     onClick={() => signOut({ callbackUrl: '/' })}
                                     className="btn btn-secondary btn-sm"
                                 >
