@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { signIn } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -9,23 +9,10 @@ import "./page.css";
 
 export default function LoginPage() {
     const [isLoading, setIsLoading] = useState<string | null>(null);
-    const supabase = createClient();
-    const router = useRouter();
 
     const handleLogin = async (provider: string) => {
         setIsLoading(provider);
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: provider as any,
-            options: {
-                redirectTo: `${window.location.origin}/auth/callback?next=/reservation`,
-            },
-        });
-
-        if (error) {
-            console.error(error);
-            setIsLoading(null);
-            // Optionally set error state here
-        }
+        await signIn(provider, { callbackUrl: '/reservation' });
     };
 
     return (

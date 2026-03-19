@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -10,7 +11,7 @@ import "./Navbar.css";
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [user, setUser] = useState<any>(null);
+    const { data: session } = useSession();
     const pathname = usePathname();
 
     useEffect(() => {
@@ -21,19 +22,7 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    useEffect(() => {
-        const supabase = createClient();
-        
-        supabase.auth.getUser().then(({ data }) => {
-            setUser(data.user);
-        });
 
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-            setUser(session?.user || null);
-        });
-
-        return () => subscription.unsubscribe();
-    }, []);
 
     useEffect(() => {
         setIsOpen(false);
@@ -72,13 +61,9 @@ export default function Navbar() {
                     ))}
 
                     <div className="navbar-actions">
-                        {user ? (
+                        {session?.user ? (
                             <button 
-                                onClick={async () => {
-                                    const supabase = createClient();
-                                    await supabase.auth.signOut();
-                                    setUser(null);
-                                }}
+                                onClick={() => signOut({ callbackUrl: '/' })}
                                 className="btn btn-secondary btn-sm"
                             >
                                 ออกจากระบบ
