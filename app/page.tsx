@@ -4,168 +4,87 @@ import "./page.css";
 
 export default function Home() {
   return (
-    <>
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-bg">
+    <div className="mobile-home">
+      {/* Background */}
+      <div className="home-bg">
+        <Image
+          src="/hero-bg.jpg"
+          alt="Longchill ambiance"
+          fill
+          priority
+          style={{ objectFit: "cover", objectPosition: "center" }}
+        />
+        <div className="home-overlay"></div>
+      </div>
+
+      <div className="home-content container">
+        {/* Header / Brand */}
+        <div className="home-brand animate-fade-in-up">
           <Image
-            src="/hero-bg.jpg"
-            alt="Longchill ambiance"
-            fill
+            src="/logo-white.png"
+            alt="Longchill"
+            width={220}
+            height={80}
+            className="home-logo"
             priority
-            style={{ objectFit: "cover" }}
           />
-          <div className="hero-overlay"></div>
+          <p className="home-subtitle">
+            ความอร่อย บรรยากาศดี ที่จะทำให้คุณชิลล์
+          </p>
         </div>
-        <div className="hero-content container">
-          <div className="hero-text animate-fade-in-up">
-            <Image
-              src="/logo-white.png"
-              alt="Longchill"
-              width={280}
-              height={100}
-              className="hero-logo"
-              priority
-            />
-            <p className="hero-tagline">ลองชิลล์</p>
-            <p className="hero-subtitle">
-              Where great food meets good vibes
-            </p>
-            <div className="hero-actions">
-              <Link href="/reservation" className="btn btn-primary">
-                Reserve a Table
-              </Link>
-              <Link href="/menu" className="btn btn-secondary">
-                View Menu
-              </Link>
-            </div>
-          </div>
-        </div>
-        <div className="hero-scroll-indicator">
-          <span></span>
-        </div>
-      </section>
 
-      {/* About Section */}
-      <section className="about-section">
-        <div className="container">
-          <div className="about-grid">
-            <div className="about-content animate-fade-in-up">
-              <div className="section-heading" style={{ textAlign: "left" }}>
-                <div className="accent-line"></div>
-                <h2>Experience the Chill</h2>
-              </div>
-              <p>
-                Longchill is more than just a bar and restaurant — it&apos;s a
-                destination. Nestled in a warm, inviting atmosphere with ambient
-                neon glow, we offer a curated selection of craft cocktails,
-                premium spirits, and dishes that excite the palate.
-              </p>
-              <p>
-                Whether you&apos;re here for a casual evening with friends, a
-                romantic dinner, or a late-night cocktail adventure, Longchill
-                is where time slows down and the vibes are always right.
-              </p>
-            </div>
-            <div className="about-features stagger-children">
-              <div className="feature-card animate-fade-in-up">
-                <span className="feature-icon">🍸</span>
-                <h4>Craft Cocktails</h4>
-                <p>Signature drinks crafted by expert mixologists</p>
-              </div>
-              <div className="feature-card animate-fade-in-up">
-                <span className="feature-icon">🍽️</span>
-                <h4>Fine Dining</h4>
-                <p>Chef-curated menu with local and international flavors</p>
-              </div>
-              <div className="feature-card animate-fade-in-up">
-                <span className="feature-icon">🎵</span>
-                <h4>Live Vibes</h4>
-                <p>Curated music and ambient atmosphere every night</p>
-              </div>
-              <div className="feature-card animate-fade-in-up">
-                <span className="feature-icon">🌙</span>
-                <h4>Late Night</h4>
-                <p>Open until late — the night is always young here</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        {/* Quick Actions (Grid) */}
+        <div className="quick-actions stagger-children">
+          <Link href="/reservation" className="action-card animate-fade-in-up">
+            <div className="action-icon">📅</div>
+            <h3>จองโต๊ะล่วงหน้า</h3>
+          </Link>
 
-      {/* Featured Menu */}
-      <section className="featured-section">
-        <div className="container">
-          <div className="section-heading">
-            <div className="accent-line"></div>
-            <h2>From Our Menu</h2>
-            <p>A taste of what awaits you at Longchill</p>
-          </div>
-          <div className="featured-grid stagger-children">
-            <div className="featured-card animate-fade-in-up">
-              <div className="featured-card-icon">🥂</div>
-              <h3>Longchill Sunset</h3>
-              <p className="featured-desc">
-                Our house signature — rum, passion fruit, lime, and grenadine
-              </p>
-              <span className="featured-price">฿259</span>
-            </div>
-            <div className="featured-card animate-fade-in-up">
-              <div className="featured-card-icon">🥩</div>
-              <h3>Grilled Ribeye</h3>
-              <p className="featured-desc">
-                250g premium ribeye with herb butter and seasonal vegetables
-              </p>
-              <span className="featured-price">฿590</span>
-            </div>
-            <div className="featured-card animate-fade-in-up">
-              <div className="featured-card-icon">🍫</div>
-              <h3>Chocolate Lava Cake</h3>
-              <p className="featured-desc">
-                Warm dark chocolate cake with vanilla ice cream
-              </p>
-              <span className="featured-price">฿189</span>
-            </div>
-          </div>
-          <div className="featured-cta">
-            <Link href="/menu" className="btn btn-secondary">
-              See Full Menu →
+          <div className="action-row">
+            <Link href="/menu" className="action-card small animate-fade-in-up">
+              <div className="action-icon">📖</div>
+              <h3>รายการอาหาร</h3>
             </Link>
+
+            <a href="https://maps.apple.com/?q=13.676609,100.609426" target="_blank" rel="noopener noreferrer" className="action-card small animate-fade-in-up">
+              <div className="action-icon">📍</div>
+              <h3>โลเคชั่น</h3>
+            </a>
           </div>
         </div>
-      </section>
 
-      {/* Hours & CTA */}
-      <section className="cta-section">
-        <div className="container">
-          <div className="cta-card">
-            <div className="cta-content">
-              <h2>Ready to Chill?</h2>
-              <p>
-                Book your table now and experience the best of food, drinks, and
-                atmosphere.
-              </p>
-              <div className="cta-hours">
-                <div className="cta-hour-item">
-                  <span className="cta-day">Mon – Thu</span>
-                  <span className="cta-time">17:00 – 00:00</span>
-                </div>
-                <div className="cta-hour-item">
-                  <span className="cta-day">Fri – Sat</span>
-                  <span className="cta-time">17:00 – 02:00</span>
-                </div>
-                <div className="cta-hour-item">
-                  <span className="cta-day">Sunday</span>
-                  <span className="cta-time">17:00 – 23:00</span>
-                </div>
+        {/* Upcoming Events */}
+        <div className="events-section animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+          <div className="section-header">
+            <h2>อีเว้นท์ที่กำลังจะมาถึง</h2>
+            <Link href="/events" className="view-all">ดูทั้งหมด</Link>
+          </div>
+
+          <div className="events-scroll">
+            <div className="event-card">
+              <div className="event-date">
+                <span className="day">25</span>
+                <span className="month">ต.ค.</span>
               </div>
-              <Link href="/reservation" className="btn btn-primary">
-                Reserve Now
-              </Link>
+              <div className="event-info">
+                <h4>Live Band: The Chillers</h4>
+                <p>ดนตรีสดสุดชิลล์ พร้อมโปรโมชั่นเครื่องดื่ม</p>
+              </div>
+            </div>
+
+            <div className="event-card">
+              <div className="event-date">
+                <span className="day">31</span>
+                <span className="month">ต.ค.</span>
+              </div>
+              <div className="event-info">
+                <h4>Halloween Night Party</h4>
+                <p>แต่งผีรับเครื่องดื่มฟรี 1 แก้ว พร้อมกิจกรรม</p>
+              </div>
             </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }

@@ -6,27 +6,19 @@ export default function Footer() {
         <footer className="footer">
             <div className="container">
                 <div className="footer-grid">
-                    <div className="footer-brand">
-                        <h3 className="footer-logo-text">Longchill</h3>
-                        <p className="footer-tagline">ลองชิลล์</p>
-                        <p className="footer-desc">
-                            Where great food meets good vibes. Unwind with craft cocktails,
-                            delicious bites, and the perfect chill atmosphere.
-                        </p>
-                    </div>
 
                     <div className="footer-col">
-                        <h4>Quick Links</h4>
+                        <h4>เมนู</h4>
                         <ul>
-                            <li><Link href="/">Home</Link></li>
-                            <li><Link href="/menu">Menu</Link></li>
-                            <li><Link href="/reservation">Reservation</Link></li>
-                            <li><Link href="/contact">Contact</Link></li>
+                            <li><Link href="/">หน้าแรก</Link></li>
+                            <li><Link href="/menu">รายการอาหาร</Link></li>
+                            <li><Link href="/reservation">จองโต๊ะล่วงหน้า</Link></li>
+                            <li><Link href="/contact">ติดต่อเรา</Link></li>
                         </ul>
                     </div>
 
                     <div className="footer-col">
-                        <h4>Opening Hours</h4>
+                        <h4>เวลาเปิดบริการ</h4>
                         <ul className="hours-list">
                             <li>
                                 <span>Monday – Thursday</span>
@@ -44,7 +36,7 @@ export default function Footer() {
                     </div>
 
                     <div className="footer-col">
-                        <h4>Contact</h4>
+                        <h4>ติดต่อเรา</h4>
                         <ul>
                             <li>📍 Longchill Bar & Restaurant</li>
                             <li>📞 (+66) 99-999-9999</li>
@@ -54,7 +46,7 @@ export default function Footer() {
                 </div>
 
                 <div className="footer-bottom">
-                    <p>© {new Date().getFullYear()} Longchill. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Power by J126s. All rights reserved.</p>
                 </div>
             </div>
         </footer>
