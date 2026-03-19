@@ -71,6 +71,32 @@
     margin-left: 16px;
 }
 
+/* User Profile */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--border-subtle);
+}
+
+.user-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .user-name {
+        display: inline-block;
+    }
+}
+
 /* Hamburger */
 .navbar-toggle {
     background: none;
@@ -137,5 +163,15 @@
     .navbar-actions {
         margin-left: 0;
         margin-top: 16px;
+    }
+    
+    .user-profile {
+        flex-direction: column;
+        margin-bottom: 8px;
+    }
+
+    .user-name {
+        display: block;
+        margin-bottom: 8px;
     }
 }

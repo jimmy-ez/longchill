@@ -62,12 +62,25 @@ export default function Navbar() {
 
                     <div className="navbar-actions">
                         {session?.user ? (
-                            <button 
-                                onClick={() => signOut({ callbackUrl: '/' })}
-                                className="btn btn-secondary btn-sm"
-                            >
-                                ออกจากระบบ
-                            </button>
+                            <div className="user-profile">
+                                {session.user.image && (
+                                    <Image 
+                                        src={session.user.image} 
+                                        alt={session.user.name || "User"} 
+                                        width={32} 
+                                        height={32} 
+                                        className="user-avatar"
+                                        unoptimized
+                                    />
+                                )}
+                                <span className="user-name">{session.user.name}</span>
+                                <button 
+                                    onClick={() => signOut({ callbackUrl: '/' })}
+                                    className="btn btn-secondary btn-sm"
+                                >
+                                    ออกจากระบบ
+                                </button>
+                            </div>
                         ) : (
                             <Link href="/login" className="btn btn-primary btn-sm">
                                 เข้าสู่ระบบ
