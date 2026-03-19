@@ -32,11 +32,6 @@ export default function MenuSlider({ foodItems, drinkItems }: MenuSliderProps) {
         setCurrentIndex((prev) => (prev === 0 ? activeItems.length - 1 : prev - 1));
     }, [activeItems.length]);
 
-    // Reset index when tab changes
-    useEffect(() => {
-        setCurrentIndex(0);
-    }, [activeTab]);
-
     // Autoplay every 7 seconds
     useEffect(() => {
         if (activeItems.length === 0) return;
@@ -51,13 +46,19 @@ export default function MenuSlider({ foodItems, drinkItems }: MenuSliderProps) {
             <div className="tabs-container">
                 <button
                     className={`tab-button ${activeTab === "food" ? "active" : ""}`}
-                    onClick={() => setActiveTab("food")}
+                    onClick={() => {
+                        setActiveTab("food");
+                        setCurrentIndex(0);
+                    }}
                 >
                     อาหาร
                 </button>
                 <button
                     className={`tab-button ${activeTab === "drink" ? "active" : ""}`}
-                    onClick={() => setActiveTab("drink")}
+                    onClick={() => {
+                        setActiveTab("drink");
+                        setCurrentIndex(0);
+                    }}
                 >
                     เครื่องดื่ม
                 </button>
@@ -73,14 +74,16 @@ export default function MenuSlider({ foodItems, drinkItems }: MenuSliderProps) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
                     </button>
 
-                    <div className="slider-content" key={activeItems[currentIndex].id}>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            src={activeItems[currentIndex].image_url!}
-                            alt={activeItems[currentIndex].name}
-                            className="slider-image fade-in"
-                        />
-                    </div>
+                    {activeItems[currentIndex] && (
+                        <div className="slider-content" key={activeItems[currentIndex].id}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src={activeItems[currentIndex].image_url!}
+                                alt={activeItems[currentIndex].name}
+                                className="slider-image fade-in"
+                            />
+                        </div>
+                    )}
 
                     <button className="slider-control next" onClick={handleNext} aria-label="Next menu">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
