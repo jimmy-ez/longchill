@@ -1,37 +1,60 @@
 .menu-page {
-    padding-top: var(--nav-height);
+    padding-bottom: 40px;
 }
 
-.page-header {
-    padding: 80px 0 10px;
-    background: linear-gradient(to bottom, var(--bg-secondary), var(--bg-primary));
+/* Header */
+.menu-header {
+    margin-top: 60px;
+    text-align: center;
+    padding: 20px 20px 10px;
+    width: 100%;
 }
 
+.menu-header h2 {
+    font-size: 2rem;
+    color: var(--amber);
+    margin-bottom: 8px;
+}
+
+.menu-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Slider Container */
 .menu-slider-container {
     display: flex;
     flex-direction: column;
-    max-width: 800px;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px;
 }
 
 /* Tabs */
 .tabs-container {
     display: flex;
     justify-content: center;
-    gap: 16px;
-    margin-bottom: 40px;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
 .tab-button {
-    padding: 12px 32px;
-    font-size: 1.1rem;
-    font-family: var(--font-heading);
-    background: transparent;
-    border: 2px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 28px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
     color: var(--text-secondary);
     border-radius: 30px;
     cursor: pointer;
-    transition: all var(--transition-normal);
+    transition: all 0.2s ease;
+}
+
+.tab-icon {
+    font-size: 1.1rem;
 }
 
 .tab-button.active {
@@ -41,34 +64,29 @@
     font-weight: 600;
 }
 
-.tab-button:hover:not(.active) {
-    border-color: var(--amber);
-    color: var(--amber);
+.tab-button:active {
+    transform: scale(0.97);
 }
 
-/* Slider Overhaul */
+/* Slider */
 .slider-wrapper {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 0;
+    gap: 0;
 }
 
 .slider-content {
     flex: 1;
     aspect-ratio: 4/5;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     background: var(--bg-card);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    max-width: 500px;
-    margin: 0 auto;
 }
 
 .slider-image {
@@ -79,7 +97,7 @@
 }
 
 .fade-in {
-    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes fadeIn {
@@ -87,7 +105,6 @@
         opacity: 0;
         transform: scale(1.02);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -95,42 +112,64 @@
 }
 
 .slider-control {
-    background: var(--bg-card);
-    border: 1px solid var(--border-subtle);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(13, 13, 13, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     color: var(--text-primary);
-    width: 48px;
-    height: 48px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
     z-index: 10;
     flex-shrink: 0;
 }
 
-.slider-control:hover {
-    background: var(--amber);
-    color: var(--bg-primary);
-    border-color: var(--amber);
+.slider-control:active {
+    transform: translateY(-50%) scale(0.92);
 }
 
-/* Dots */
+.slider-control.prev {
+    left: 10px;
+}
+
+.slider-control.next {
+    right: 10px;
+}
+
+/* Slider Footer */
+.slider-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.slide-counter {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
 .slider-dots {
     display: flex;
     justify-content: center;
     gap: 8px;
-    margin-top: 32px;
 }
 
 .dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: var(--border-subtle);
+    background: rgba(255, 255, 255, 0.15);
     cursor: pointer;
-    transition: all var(--transition-fast);
+    transition: all 0.2s ease;
     border: none;
     padding: 0;
 }
@@ -138,72 +177,53 @@
 .dot.active {
     background: var(--amber);
     width: 24px;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 /* Empty State */
 .empty-state {
     text-align: center;
-    padding: 80px 24px;
+    padding: 60px 24px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 20px;
     color: var(--text-secondary);
 }
 
-.empty-state p {
-    font-size: 1.1rem;
-    margin-bottom: 8px;
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.7;
 }
 
-.empty-hint {
-    color: var(--text-muted);
-    font-size: 0.9rem !important;
+.empty-state p {
+    font-size: 1rem;
 }
 
 .menu-content {
-    padding: 40px 0 100px;
+    display: flex;
+    justify-content: center;
+    padding: 0 0 40px;
 }
 
-@media (max-width: 768px) {
-    .page-header {
-        padding: 24px 0 16px;
+/* Desktop */
+@media (min-width: 768px) {
+    .menu-slider-container {
+        max-width: 600px;
     }
 
-    .menu-content {
-        padding: 16px 0 80px;
+    .slider-control {
+        width: 48px;
+        height: 48px;
     }
 
-    .tabs-container {
-        margin-bottom: 24px;
-    }
-
-    .slider-wrapper {
-        gap: 0;
+    .slider-control:hover {
+        background: var(--amber);
+        color: var(--bg-primary);
+        border-color: var(--amber);
     }
 
     .slider-content {
-        max-width: 100%;
-        border-radius: 8px;
-    }
-
-    /* Absolute position controls over the image on mobile to save horizontal space */
-    .slider-control {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 40px;
-        height: 40px;
-        opacity: 0.85;
-    }
-
-    .slider-control.prev {
-        left: 8px;
-    }
-
-    .slider-control.next {
-        right: 8px;
-    }
-
-    .tab-button {
-        padding: 8px 24px;
-        font-size: 0.95rem;
+        border-radius: 20px;
     }
 }

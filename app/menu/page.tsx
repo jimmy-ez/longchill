@@ -42,22 +42,21 @@ export default async function MenuPage() {
     const drinkItems = menuItems.filter((item) => item.category === "drink" && item.image_url);
 
     return (
-        <div className="menu-page">
+        <div className="menu-page mobile-layout">
+            <div className="menu-header animate-fade-in-up">
+                <h2>เมนูอาหารและเครื่องดื่ม</h2>
+                <p>เลือกชมเมนูสุดพิเศษจาก Longchill</p>
+            </div>
 
-            {/* Menu Content */}
             <section className="menu-content">
-                <div className="container">
-                    {menuItems.length === 0 ? (
-                        <div className="empty-state">
-                            <p>🍽️ Menu items will appear here once the database is set up.</p>
-                            <p className="empty-hint">
-                                Add some food and drink items with images to display them here.
-                            </p>
-                        </div>
-                    ) : (
-                        <MenuSlider foodItems={foodItems} drinkItems={drinkItems} />
-                    )}
-                </div>
+                {menuItems.length === 0 ? (
+                    <div className="empty-state">
+                        <div className="empty-icon">🍽️</div>
+                        <p>ยังไม่มีเมนูในขณะนี้</p>
+                    </div>
+                ) : (
+                    <MenuSlider foodItems={foodItems} drinkItems={drinkItems} />
+                )}
             </section>
         </div>
     );
