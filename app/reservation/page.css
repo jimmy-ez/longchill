@@ -46,6 +46,15 @@
     gap: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(12px);
+    overflow: hidden;
+}
+
+.res-form-group .form-input[type="date"],
+.res-form-group .form-input[type="time"] {
+    -webkit-appearance: none;
+    appearance: none;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .res-form-group {
