@@ -55,6 +55,7 @@
     appearance: none;
     min-width: 0;
     max-width: 100%;
+    min-height: 50px;
 }
 
 .res-form-group {
