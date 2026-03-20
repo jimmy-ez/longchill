@@ -1,0 +1,73 @@
+.events-page {
+    padding-bottom: 40px;
+}
+
+.events-page-header {
+    text-align: center;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.events-page-header h2 {
+    font-size: 2rem;
+    color: var(--amber);
+    margin-bottom: 8px;
+}
+
+.events-page-header p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.events-page-content {
+    width: 100%;
+    max-width: 500px;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.events-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.events-group-title {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    padding-left: 4px;
+}
+
+.events-group-title.past {
+    color: var(--text-muted);
+}
+
+.events-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.past-list .event-card {
+    opacity: 0.5;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border-subtle);
+    border-radius: 20px;
+    color: var(--text-secondary);
+}
+
+.empty-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    opacity: 0.7;
+}

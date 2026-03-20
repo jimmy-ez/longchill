@@ -31,11 +31,12 @@ export default function Navbar() {
     const navLinks = [
         { href: "/", label: "หน้าแรก" },
         { href: "/menu", label: "รายการอาหาร" },
+        { href: "/events", label: "อีเว้นท์" },
         { href: "/reservation", label: "จองโต๊ะล่วงหน้า" },
         ...(session?.user ? [{ href: "/history", label: "รายการจองของฉัน" }] : []),
     ];
 
-    const showBackBtn = ["/reservation", "/menu", "/history", "/contact"].includes(pathname);
+    const showBackBtn = ["/reservation", "/menu", "/history", "/contact", "/events"].includes(pathname) || pathname.startsWith("/events/");
 
     return (
         <nav className={`navbar ${scrolled ? "navbar-scrolled" : ""}`}>

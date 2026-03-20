@@ -46,3 +46,15 @@ create table public.menu_items (
     )
   )
 ) TABLESPACE pg_default;
+
+create table public.events (
+  id uuid not null default gen_random_uuid (),
+  name text not null,
+  image_url text null,
+  event_date date not null,
+  event_time time without time zone not null,
+  description text null,
+  is_visible boolean null default true,
+  created_at timestamp with time zone not null default timezone ('utc'::text, now()),
+  constraint events_pkey primary key (id)
+) TABLESPACE pg_default;

@@ -1,8 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/server";
+import EventCard from "@/components/EventCard";
 import "./page.css";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  let events: any[] = [];
+
+  try {
+    const supabase = await createClient();
+    const today = new Date().toISOString().split("T")[0];
+
+    const { data } = await supabase
+      .from("events")
+      .select("*")
+      .eq("is_visible", true)
+      .gte("event_date", today)
+      .order("event_date")
+      .order("event_time")
+      .limit(4);
+
+    events = data || [];
+  } catch (e) {
+    // Silently fail — homepage still renders
+  }
+
   return (
     <div className="mobile-home">
       {/* Background */}
@@ -54,36 +78,20 @@ export default function Home() {
         </div>
 
         {/* Upcoming Events */}
-        <div className="events-section animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
-          <div className="section-header">
-            <h2>อีเว้นท์ที่กำลังจะมาถึง</h2>
-            <Link href="/events" className="view-all">ดูทั้งหมด</Link>
-          </div>
-
-          <div className="events-scroll">
-            <div className="event-card">
-              <div className="event-date">
-                <span className="day">25</span>
-                <span className="month">ต.ค.</span>
-              </div>
-              <div className="event-info">
-                <h4>Live Band: The Chillers</h4>
-                <p>ดนตรีสดสุดชิลล์ พร้อมโปรโมชั่นเครื่องดื่ม</p>
-              </div>
+        {events.length > 0 && (
+          <div className="events-section animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+            <div className="section-header">
+              <h2>อีเว้นท์ที่กำลังจะมาถึง</h2>
+              <Link href="/events" className="view-all">ดูทั้งหมด</Link>
             </div>
 
-            <div className="event-card">
-              <div className="event-date">
-                <span className="day">31</span>
-                <span className="month">ต.ค.</span>
-              </div>
-              <div className="event-info">
-                <h4>Halloween Night Party</h4>
-                <p>แต่งผีรับเครื่องดื่มฟรี 1 แก้ว พร้อมกิจกรรม</p>
-              </div>
+            <div className="events-scroll">
+              {events.map((event) => (
+                <EventCard key={event.id} event={event} />
+              ))}
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
