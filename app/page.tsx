@@ -70,7 +70,7 @@ export default async function Home() {
               <h3>รายการอาหาร</h3>
             </Link>
 
-            <a href="https://share.google/s8apeow460rh3IEF9" target="_blank" rel="noopener noreferrer" className="action-card small animate-fade-in-up">
+            <a href="https://www.google.com/maps/place/Megatoy+Autocars/@13.946513,100.4741003,17z/data=!3m1!4b1!4m6!3m5!1s0x30e285cd85fab77f:0x9b79f360c185faad!8m2!3d13.946513!4d100.4741003!16s%2Fg%2F11ssftqhzw?entry=ttu&g_ep=EgoyMDI2MDMxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="action-card small animate-fade-in-up">
               <div className="action-icon">📍</div>
               <h3>โลเคชั่น</h3>
             </a>
