@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import "./page.css";
 
 export default function ReservationPage() {
     const { data: session } = useSession();
+    const router = useRouter();
 
     const [formData, setFormData] = useState({
         customer_name: "",
@@ -108,12 +110,20 @@ export default function ReservationPage() {
                         <div className="res-success-icon">🎉</div>
                         <h3>จองโต๊ะสำเร็จ!</h3>
                         <p>ขอบคุณที่เลือก Longchill ทางเราได้รับข้อมูลการจองของคุณเรียบร้อยแล้ว</p>
-                        <button
-                            className="btn btn-primary btn-full res-btn-margin"
-                            onClick={() => setStatus("idle")}
-                        >
-                            จองโต๊ะเพิ่ม
-                        </button>
+                        <div style={{ display: "flex", gap: "12px", width: "100%", flexDirection: "row", justifyContent: "center" }}>
+                            <button
+                                className="btn btn-primary btn-full res-btn-margin"
+                                onClick={() => setStatus("idle")}
+                            >
+                                จองโต๊ะเพิ่ม
+                            </button>
+                            <button
+                                className="btn btn-secondary btn-full res-btn-margin"
+                                onClick={() => router.push("/history")}
+                            >
+                                รายการจองของฉัน
+                            </button>
+                        </div>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="res-form animate-fade-in-up">
@@ -179,7 +189,7 @@ export default function ReservationPage() {
                                 required
                             />
                         </div>
-                        
+
                         <div className="res-form-group">
                             <label htmlFor="time">เวลามารับโต๊ะ</label>
                             <select
