@@ -139,6 +139,23 @@
     font-weight: 500;
 }
 
+.table-badges-container {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.table-badge {
+    background: rgba(11, 245, 167, 0.1);
+    color: rgba(11, 245, 167, 1);
+    border: 1px solid rgba(11, 245, 167, 0.3);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 .history-toggle {
     margin-bottom: 4px;
 }

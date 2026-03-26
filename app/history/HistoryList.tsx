@@ -10,6 +10,7 @@ interface Reservation {
     customer_name: string;
     phone: string;
     status: string;
+    table_no: string;
 }
 
 const getStatusText = (status: string) => {
@@ -28,6 +29,25 @@ const getStatusClass = (status: string) => {
         case "cancelled": return "status-cancelled";
         default: return "";
     }
+};
+
+const renderTableBadges = (tableStr: string | null | undefined) => {
+    if (!tableStr || tableStr === "-") return "-";
+    try {
+        const parsed = JSON.parse(tableStr);
+        if (Array.isArray(parsed)) {
+            return (
+                <div className="table-badges-container">
+                    {parsed.map((t, i) => (
+                        <span key={i} className="table-badge">{t}</span>
+                    ))}
+                </div>
+            );
+        }
+    } catch {
+        // Not a JSON array, fallback below
+    }
+    return <span className="table-badge">{tableStr}</span>;
 };
 
 export default function HistoryList({ reservations }: { reservations: Reservation[] }) {
@@ -87,6 +107,12 @@ export default function HistoryList({ reservations }: { reservations: Reservatio
                                 <div className="detail-row">
                                     <span className="label">จำนวน:</span>
                                     <span className="value">{res.party_size} ท่าน</span>
+                                </div>
+                                <div className="detail-row">
+                                    <span className="label">โต๊ะ:</span>
+                                    <div className="value">
+                                        {renderTableBadges(res.table_no)}
+                                    </div>
                                 </div>
                                 <div className="detail-row">
                                     <span className="label">ชื่อผู้จอง:</span>
