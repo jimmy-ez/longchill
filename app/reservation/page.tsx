@@ -72,6 +72,7 @@ export default function ReservationPage() {
         } finally {
             setLoadingTables(false);
             setStep(2);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         }
     };
 
@@ -130,6 +131,7 @@ export default function ReservationPage() {
             });
             setSelectedTables([]);
             setStep(1);
+            window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (err: unknown) {
             setStatus("error");
             setErrorMsg(
@@ -145,6 +147,7 @@ export default function ReservationPage() {
         setOccupiedTables([]);
         setBookedTables([]);
         setErrorMsg("");
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     const [today, setToday] = useState("");
@@ -271,7 +274,7 @@ export default function ReservationPage() {
         <div className="res-form animate-fade-in-up">
             {/* Step indicator */}
             <div className="res-step-indicator">
-                <div className="res-step res-step--done" onClick={() => setStep(1)} style={{ cursor: "pointer" }}>
+                <div className="res-step res-step--done" onClick={() => { setStep(1); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ cursor: "pointer" }}>
                     <span className="res-step-num">✓</span>
                     <span className="res-step-label">ข้อมูล</span>
                 </div>
@@ -319,7 +322,7 @@ export default function ReservationPage() {
             <button
                 type="button"
                 className="res-back-btn"
-                onClick={() => setStep(1)}
+                onClick={() => { setStep(1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
             >
                 ← แก้ไขข้อมูล
             </button>
