@@ -18,6 +18,7 @@ create table public.reservations (
   party_size numeric not null,
   status text not null,
   uid uuid not null,
+  table_no text not null default ''::text,
   constraint reservations_pkey primary key (id),
   constraint reservations_id_key unique (id),
   constraint reservations_uid_fkey foreign KEY (uid) references users (id)
