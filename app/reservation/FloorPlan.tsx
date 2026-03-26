@@ -81,7 +81,7 @@ export default function FloorPlan({
 
                 {/* Header row: zone label + WELCOME sign */}
                 <div className="fp-std-topbar">
-                    <div className="fp-zone-header fp-zone-header--std">Standard Zone</div>
+                    <div className="fp-zone-header fp-zone-header--std">โซนทั่วไป</div>
                     <div className="fp-welcome-badge">🚪 WELCOME</div>
                 </div>
 
@@ -114,7 +114,7 @@ export default function FloorPlan({
 
                             {/* Stage — arch / dome shape */}
                             <div className="fp-stage">
-                                <span className="fp-stage-text">Stage</span>
+                                <span className="fp-stage-text">เวที</span>
                             </div>
 
                             {/* T23, T24 side-by-side, Monitor below */}
@@ -122,7 +122,7 @@ export default function FloorPlan({
                                 <div className="fp-horiz-pair">
                                     {T("T23")}{T("T24")}
                                 </div>
-                                <div className="fp-monitor">📺 Monitor</div>
+                                <div className="fp-monitor">📺 จอทีวี</div>
                             </div>
 
                         </div>
@@ -132,24 +132,15 @@ export default function FloorPlan({
                     <div className="fp-sidebar">
                         <div className="fp-sidebar-item fp-sidebar--cashier">
                             <span>🖥️</span>
-                            <span>แคช<br/>เชียร์</span>
+                            <span style={{ writingMode: 'vertical-rl', fontSize: 'clamp(0.6rem, 2.8vw, 0.85rem)', fontWeight: 600, letterSpacing: '0.15em', marginTop: '2px' }}>เคาน์เตอร์</span>
                         </div>
                         <div className="fp-sidebar-item fp-sidebar--wc">
                             <span>🚻</span>
-                            <span>WC</span>
+                            <span style={{ writingMode: 'vertical-rl', fontSize: 'clamp(0.6rem, 2.8vw, 0.85rem)', fontWeight: 600, letterSpacing: '0.15em', marginTop: '2px' }}>ห้องน้ำ</span>
                         </div>
                     </div>
 
                 </div>
-            </div>
-
-            {/* ══════════════════ Staircase Divider ══════════════════════ */}
-            <div className="fp-stair-divider">
-                <div className="fp-stair-line" />
-                <div className="fp-stair-badge">
-                    🪜 บันไดขึ้น VIP Zone (ชั้นลอย)
-                </div>
-                <div className="fp-stair-line" />
             </div>
 
             {/* ══════════════════ VIP Zone (ชั้นลอย) ════════════════════ */}
@@ -157,44 +148,67 @@ export default function FloorPlan({
 
                 {/* Plants + header */}
                 <div className="fp-vip-header">
-                    <span className="fp-plant">🌿</span>
-                    <div className="fp-zone-header fp-zone-header--vip">VIP Zone — ชั้นลอย</div>
-                    <span className="fp-plant">🌿</span>
-                </div>
-
-                {/* Row 1: V1 V2 V3 V4 */}
-                <div className="fp-grid fp-grid--4">
-                    {T("V1")}{T("V2")}{T("V3")}{T("V4")}
-                </div>
-
-                {/* Row 2: V5 V6 V7 V8 */}
-                <div className="fp-grid fp-grid--4">
-                    {T("V5")}{T("V6")}{T("V7")}{T("V8")}
+                    <span className="fp-plant">⭐️</span>
+                    <div className="fp-zone-header fp-zone-header--vip">VIP Zone</div>
+                    <span className="fp-plant">⭐️</span>
                 </div>
 
                 {/*
-                 * Row 3 (matches image):
-                 *   V9 [empty gap] V10 V11
-                 * The staircase access is from Standard zone below.
+                 * VIP layout:
+                 *  ┌───────────────────────┬───┐
+                 *  │ V1  V2  V3  V4        │▓▓▓│  ← rows 1-2: tall railing
+                 *  │ V5  V6  V7  V8        │▓▓▓│
+                 *  │ V9      V10  V11      │🪜 │  ← row 3: stairs
+                 *  │ V12 V13     V14  V15  │▓▓▓│  ← row 4: short railing
+                 *  └───────────────────────┴───┘
                  */}
-                <div className="fp-grid fp-grid--4">
-                    {T("V9")}
-                    <div className="fp-empty-cell" />
-                    {T("V10")}
-                    {T("V11")}
-                </div>
+                <div className="fp-vip-layout">
 
-                {/*
-                 * Row 4 (matches image):
-                 *   [V12 V13] ··· gap ··· [V14 V15]
-                 */}
-                <div className="fp-vip-split">
-                    <div className="fp-grid fp-grid--2">
-                        {T("V12")}{T("V13")}
+                    {/* ── Table rows ── */}
+                    <div className="fp-vip-tables">
+
+                        {/* Row 1: V1 V2 V3 V4 */}
+                        <div className="fp-grid fp-grid--4">
+                            {T("V1")}{T("V2")}{T("V3")}{T("V4")}
+                        </div>
+
+                        {/* Row 2: V5 V6 V7 V8 */}
+                        <div className="fp-grid fp-grid--4">
+                            {T("V5")}{T("V6")}{T("V7")}{T("V8")}
+                        </div>
+
+                        {/* Row 3: V9 [aisle] V10 V11 */}
+                        <div className="fp-grid fp-grid--4">
+                            {T("V9")}
+                            <div className="fp-empty-cell" />
+                            {T("V10")}
+                            {T("V11")}
+                        </div>
+
+                        {/* Row 4: [V12 V13] ··gap·· [V14 V15] */}
+                        <div className="fp-vip-split">
+                            <div className="fp-grid fp-grid--2">
+                                {T("V12")}{T("V13")}
+                            </div>
+                            <div className="fp-grid fp-grid--2">
+                                {T("V14")}{T("V15")}
+                            </div>
+                        </div>
+
                     </div>
-                    <div className="fp-grid fp-grid--2">
-                        {T("V14")}{T("V15")}
+
+                    {/* ── Right structure: railing / stairs / railing ── */}
+                    <div className="fp-vip-right">
+                        {/* Tall railing — spans rows 1 + 2 */}
+                        <div className="fp-vip-rail fp-vip-rail--tall" />
+                        {/* Stairs — at row 3 level */}
+                        <div className="fp-vip-stairs-block">
+                            <span style={{ writingMode: 'vertical-rl', fontSize: 'clamp(0.75rem, 3.2vw, 1rem)', fontWeight: 700, letterSpacing: '0.2rem' }}>บันได</span>
+                        </div>
+                        {/* Short railing — row 4 */}
+                        <div className="fp-vip-rail fp-vip-rail--short" />
                     </div>
+
                 </div>
 
             </div>

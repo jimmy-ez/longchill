@@ -535,7 +535,7 @@
 }
 
 .fp-stage-text {
-    font-size: clamp(0.55rem, 1.8vw, 0.72rem);
+    font-size: clamp(0.80rem, 1.8vw, 1rem);
     font-weight: 700;
     letter-spacing: 0.06em;
     color: #fbbf24;
@@ -562,7 +562,7 @@
 }
 
 .fp-monitor {
-    font-size: 0.56rem;
+    font-size: clamp(0.80rem, 1.8vw, 1rem);
     color: #818cf8;
     background: rgba(99, 102, 241, 0.07);
     border: 1px dashed rgba(99, 102, 241, 0.22);
@@ -674,8 +674,73 @@
 }
 
 .fp-vip-split .fp-grid--2 {
-    /* Each group takes exactly 2 columns of the 4-col grid width */
     width: calc(50% - 3px);
+}
+
+/* ── VIP main layout (tables + right railing structure) ── */
+.fp-vip-layout {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+}
+
+.fp-vip-tables {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+/* Right-side railing/stairs column */
+.fp-vip-right {
+    width: 22px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    /* same gap as table rows */
+}
+
+/* Crosshatch railing/fence — matches sketch */
+.fp-vip-rail {
+    border-radius: 5px;
+    border: 1.5px solid rgba(168, 85, 247, 0.45);
+    background-color: rgba(168, 85, 247, 0.05);
+    background-image:
+        repeating-linear-gradient(45deg,
+            rgba(168, 85, 247, 0.28) 0px,
+            rgba(168, 85, 247, 0.28) 1.5px,
+            transparent 1.5px,
+            transparent 6px),
+        repeating-linear-gradient(-45deg,
+            rgba(168, 85, 247, 0.28) 0px,
+            rgba(168, 85, 247, 0.28) 1.5px,
+            transparent 1.5px,
+            transparent 6px);
+}
+
+/* Tall railing spans rows 1 + 2 (flex: 2 ≈ 2 row heights) */
+.fp-vip-rail--tall {
+    flex: 2;
+}
+
+/* Short railing spans row 4 (flex: 1 ≈ 1 row height) */
+.fp-vip-rail--short {
+    flex: 1;
+}
+
+/* Stairs block at row 3 level */
+.fp-vip-stairs-block {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1.5px solid rgba(168, 85, 247, 0.4);
+    border-radius: 6px;
+    color: #c084fc;
+    font-size: clamp(0.65rem, 2vw, 0.85rem);
 }
 
 /* ─── Responsive ──────────────────────────────────── */
@@ -898,7 +963,7 @@
 }
 
 .fp-table-id {
-    font-size: clamp(0.58rem, 2vw, 0.72rem);
+    font-size: clamp(0.72rem, 2vw, 0.8rem);
     font-weight: 700;
     line-height: 1.1;
 }
