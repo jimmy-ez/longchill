@@ -183,6 +183,45 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
 
+        // ── LINE Messaging API (fire-and-forget) ─────────────────────────
+        const lineToken = process.env.LINE_MESSAGING_TOKEN;
+        const lineGroupId = process.env.LINE_GROUP_ID;
+        if (lineToken && lineGroupId) {
+            // วันที่: YYYY-MM-DD → DD-MM-YYYY
+            const [y, mo, d] = bookingDate.split("-");
+            const dateDisplay = `${d}-${mo}-${y}`;
+
+            // เวลา: "17:30:00+07:00" → "17.30"
+            const timeMatch = bookingTime.match(/^(\d{2}):(\d{2})/);
+            const timeDisplay = timeMatch ? `${timeMatch[1]}.${timeMatch[2]}` : bookingTime;
+
+            const modeLabel = bookingMode === "with-table"
+                ? `🪑 เลือกโต๊ะ: ${tableNo.join(", ")}`
+                : "🚶 ไม่เลือกโต๊ะ (ทางร้านจัดให้)";
+
+            const text = [
+                "🔔 มีการจองโต๊ะใหม่!",
+                `👤 ชื่อ: ${body.customer_name}`,
+                `📞 เบอร์: ${body.phone}`,
+                `📅 วันที่: ${dateDisplay}`,
+                `🕐 เวลา: ${timeDisplay} น.`,
+                `👥 จำนวน: ${partySize} คน`,
+                modeLabel,
+            ].join("\n");
+
+            fetch("https://api.line.me/v2/bot/message/push", {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${lineToken}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    to: lineGroupId,
+                    messages: [{ type: "text", text }],
+                }),
+            }).catch((err) => console.error("LINE Messaging API error:", err));
+        }
+
         return NextResponse.json({ success: true });
     } catch (error: unknown) {
         const msg = error instanceof Error ? error.message : "Internal Server Error";
