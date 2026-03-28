@@ -59,8 +59,8 @@ export default function ReservationPage() {
     const [errorMsg, setErrorMsg] = useState("");
     const [bookedTables, setBookedTables] = useState<string[]>([]);
 
-    const [today, setToday] = useState("");
-    const [maxDate, setMaxDate] = useState("");
+    const [today] = useState(() => getTodayTH());
+    const [maxDate] = useState(() => getMaxDateTH(7));
     const [nowMinutes, setNowMinutes] = useState(0);
 
     // Pre-fill name if logged in
@@ -73,9 +73,6 @@ export default function ReservationPage() {
     }, [session, hasPrefilled]);
 
     useEffect(() => {
-        const todayStr = getTodayTH();
-        setToday(todayStr);
-        setMaxDate(getMaxDateTH(7));
         setNowMinutes(getNowMinutesTH());
     }, []);
 
@@ -546,7 +543,7 @@ export default function ReservationPage() {
                 <div className="res-info-section animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
                     <h4>ข้อมูลติดต่อ &amp; เงื่อนไข</h4>
                     <ul className="res-info-list">
-                        <li>🕒 แนะนำให้มาตรงเวลา หากมาช้าเกิน 30 นาทีทางร้านขออนุญาตปล่อยโต๊ะตามคิว</li>
+                        <li>🕒 แนะนำให้มาตรงเวลา หากมาช้าเกิน 15 นาทีทางร้านขออนุญาตปล่อยโต๊ะตามคิว</li>
                         <li>🪑 แต่ละโต๊ะรองรับสูงสุด 4 ท่าน</li>
                         <li>📅 จองล่วงหน้าได้สูงสุด 7 วัน</li>
                         <li>🗓️ แบบเลือกโต๊ะ: จองวันนี้ต้องทำก่อน 17:00 น.</li>

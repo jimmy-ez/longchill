@@ -16,7 +16,7 @@ const THAI_MONTHS_SHORT = [
     "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค.",
 ];
 
-export default function EventCard({ event }: { event: Event }) {
+export default function EventCard({ event, priority = false }: { event: Event; priority?: boolean }) {
     const d = new Date(event.event_date);
     const day = d.getDate();
     const month = THAI_MONTHS_SHORT[d.getMonth()];
@@ -31,6 +31,7 @@ export default function EventCard({ event }: { event: Event }) {
                         alt={event.name}
                         fill
                         style={{ objectFit: "cover" }}
+                        priority={priority}
                         unoptimized
                     />
                 ) : (

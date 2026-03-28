@@ -52,8 +52,8 @@ export default async function EventsPage() {
                             <div className="events-group animate-fade-in-up">
                                 <h3 className="events-group-title">กำลังจะมาถึง</h3>
                                 <div className="events-list">
-                                    {upcoming.map((event) => (
-                                        <EventCard key={event.id} event={event} />
+                                    {upcoming.map((event, index) => (
+                                        <EventCard key={event.id} event={event} priority={index === 0} />
                                     ))}
                                 </div>
                             </div>

@@ -98,8 +98,8 @@ export default async function Home() {
             </div>
 
             <div className="events-scroll">
-              {events.map((event) => (
-                <EventCard key={event.id} event={event} />
+              {events.map((event, index) => (
+                <EventCard key={event.id} event={event} priority={index === 0} />
               ))}
             </div>
           </div>
@@ -111,16 +111,16 @@ export default async function Home() {
             <h2>ติดตามเรา</h2>
           </div>
           <div className="social-links-row">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://lin.ee/QbUYUCS" target="_blank" rel="noopener noreferrer" className="social-link">
               <Image src="/icons/line.png" alt="LINE OA" width={42} height={42} className="social-img" />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.facebook.com/Longchillbar" target="_blank" rel="noopener noreferrer" className="social-link">
               <Image src="/icons/facebook.png" alt="Facebook" width={42} height={42} className="social-img" />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.instagram.com/longchill.bar" target="_blank" rel="noopener noreferrer" className="social-link">
               <Image src="/icons/ig.png" alt="Instagram" width={42} height={42} className="social-img" />
             </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" className="social-link">
+            <a href="https://www.tiktok.com/@longchill.bar" target="_blank" rel="noopener noreferrer" className="social-link">
               <Image src="/icons/tiktok.png" alt="TikTok" width={42} height={42} className="social-img" />
             </a>
           </div>
