@@ -75,18 +75,17 @@ export default async function Home() {
               <h3>โลเคชั่น</h3>
             </a>
           </div>
+        </div>
 
-          <div style={{ textAlign: "center", marginTop: "0.5rem" }} className="animate-fade-in-up">
-            <a
-              href="https://maps.app.goo.gl/W33qzcK1kzxWtqnv6?g_st=il"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "#bbb", textDecoration: "underline", fontSize: "14px" }}
-            >
-              รีวิวจากลูกค้าบน Google
-            </a>
-          </div>
-
+        <div style={{ textAlign: "center", marginTop: "0.5rem" }} className="animate-fade-in-up">
+          <a
+            href="https://maps.app.goo.gl/W33qzcK1kzxWtqnv6?g_st=il"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#bbb", textDecoration: "underline", fontSize: "14px" }}
+          >
+            รีวิวจากลูกค้าบน Google
+          </a>
         </div>
 
         {/* Upcoming Events */}
