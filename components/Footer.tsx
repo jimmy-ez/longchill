@@ -26,7 +26,7 @@ export default function Footer() {
                             </li>
                             <li>
                                 <span>เสาร์ - อาทิตย์</span>
-                                <span>17:00 – 02:00</span>
+                                <span>17:00 – 00:00</span>
                             </li>
                         </ul>
                     </div>
@@ -34,9 +34,8 @@ export default function Footer() {
                     <div className="footer-col">
                         <h4>ติดต่อเรา</h4>
                         <ul>
-                            <li>📍 Longchill Bar & Restaurant</li>
-                            <li>📞 (+66) 99-999-9999</li>
-                            <li>✉️ hello@longchill.com</li>
+                            <li>📍 Longchill Mala & Bar</li>
+                            <li>📞 095-313-0999</li>
                         </ul>
                     </div>
                 </div>

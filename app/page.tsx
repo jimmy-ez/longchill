@@ -32,7 +32,7 @@ export default async function Home() {
       {/* Background */}
       <div className="home-bg">
         <Image
-          src="/hero-bg.jpg"
+          src="/hero-bg-1.png"
           alt="Longchill ambiance"
           fill
           priority
@@ -51,10 +51,10 @@ export default async function Home() {
             height={80}
             className="home-logo"
             priority
+            style={{ width: "auto", height: "auto" }}
           />
-          <p className="home-subtitle">
-            ความอร่อย บรรยากาศดี ที่จะทำให้คุณชิลล์
-          </p>
+          <p style={{ fontSize: "20px", color: "#9d9999ff", fontStyle: "italic" }}>Long Nights Chill Vibes</p>
+          <p style={{ fontSize: "16px", color: "#9d9999ff", fontStyle: "italic" }}>หม่าล่า เครื่องดื่ม ดนตรีสด</p>
         </div>
 
         {/* Quick Actions (Grid) */}
@@ -75,6 +75,18 @@ export default async function Home() {
               <h3>โลเคชั่น</h3>
             </a>
           </div>
+
+          <div style={{ textAlign: "center", marginTop: "0.5rem" }} className="animate-fade-in-up">
+            <a
+              href="https://maps.app.goo.gl/W33qzcK1kzxWtqnv6?g_st=il"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "#bbb", textDecoration: "underline", fontSize: "14px" }}
+            >
+              รีวิวจากลูกค้าบน Google
+            </a>
+          </div>
+
         </div>
 
         {/* Upcoming Events */}
