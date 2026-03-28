@@ -345,631 +345,249 @@
     border: 1px solid rgba(239, 68, 68, 0.4);
 }
 
-/* ── Zone wrappers ── */
-.fp-zone {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-}
-
-.fp-zone-header {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 5px;
-    display: inline-block;
-}
-
-.fp-zone-header--std {
-    background: rgba(59, 130, 246, 0.12);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.fp-zone-header--vip {
-    background: rgba(168, 85, 247, 0.15);
-    color: #c084fc;
-    border: 1px solid rgba(168, 85, 247, 0.25);
-}
-
-/* ── Grids ── */
-.fp-grid {
-    display: grid;
-    gap: 6px;
-}
-
-.fp-grid--2 {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.fp-grid--4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.fp-grid--5 {
-    grid-template-columns: repeat(5, 1fr);
-}
-
-.fp-empty-cell {
-    pointer-events: none;
-    /* transparent placeholder to keep grid alignment */
-}
-
-/* ── Table button ── */
-.fp-table {
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    border: 1.5px solid transparent;
-    cursor: pointer;
-    transition: all 0.15s ease;
-    gap: 1px;
-    padding: 2px;
-    -webkit-tap-highlight-color: transparent;
-    min-width: 0;
-    min-height: 0;
-}
-
-.fp-table-id {
-    font-size: clamp(0.52rem, 2vw, 0.7rem);
-    font-weight: 700;
-    line-height: 1.1;
-}
-
-.fp-table-icon {
-    font-size: clamp(0.4rem, 1.4vw, 0.56rem);
-    line-height: 1;
-}
-
-.fp-table--available {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.14);
-    color: var(--text-primary);
-}
-
-.fp-table--available:hover:not(:disabled) {
-    background: rgba(245, 158, 11, 0.12);
-    border-color: rgba(245, 158, 11, 0.45);
-    transform: scale(1.06);
-    box-shadow: 0 0 8px rgba(245, 158, 11, 0.15);
-}
-
-.fp-table--available:active:not(:disabled) {
-    transform: scale(0.95);
-}
-
-.fp-table--selected {
-    background: rgba(245, 158, 11, 0.18);
-    border-color: var(--amber);
-    color: var(--amber);
-    box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
-}
-
-.fp-table--selected:hover:not(:disabled) {
-    background: rgba(245, 158, 11, 0.26);
-    transform: scale(1.04);
-}
-
-.fp-table--occupied {
-    background: rgba(239, 68, 68, 0.07);
-    border-color: rgba(239, 68, 68, 0.18);
-    color: rgba(239, 68, 68, 0.45);
-    cursor: not-allowed;
-    opacity: 0.55;
-}
-
 /* ══════════════════════════════════════════════════════
-   Standard Zone
+   NEW FLOOR PLAN LAYOUT
 ══════════════════════════════════════════════════════ */
 
-/* Header row: "Standard Zone" label + WELCOME badge */
-.fp-std-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-.fp-welcome-badge {
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #4ade80;
-    background: rgba(34, 197, 94, 0.08);
-    border: 1px solid rgba(34, 197, 94, 0.2);
-    padding: 3px 8px;
-    border-radius: 5px;
-    white-space: nowrap;
-}
-
-/* Main layout: tables + sidebar */
-.fp-std-layout {
-    display: grid;
-    grid-template-columns: 1fr 30px;
-    gap: 5px;
-    align-items: start;
-}
-
-.fp-std-main {
+.fp-board {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-}
-
-/* Bottom area: T21/T22 | Stage (arch) | T23/T24 + Monitor */
-.fp-bottom-area {
-    display: flex;
-    align-items: flex-start;
-    gap: 5px;
-}
-
-/* T21, T22 stacked vertically (left of Stage) */
-.fp-vert-pair {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    flex-shrink: 0;
-    /* same width as one column in the 5-col grid */
-    width: calc((100% - 4 * 6px) / 5);
-}
-
-/* Stage — arch / dome silhouette */
-.fp-stage {
-    flex: 1;
-    /* roughly 2 columns wide */
-    align-self: stretch;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(251, 191, 36, 0.07);
-    border: 1.5px solid rgba(251, 191, 36, 0.3);
-    /* dome: rounded top, straight bottom */
-    border-radius: 60% 60% 8px 8px / 30% 30% 8px 8px;
-    min-height: 60px;
-    position: relative;
-}
-
-.fp-stage-text {
-    font-size: clamp(0.80rem, 1.8vw, 1rem);
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    color: #fbbf24;
-    margin-top: 18%;
-    /* nudge down below the arch curve */
-}
-
-/* T23/T24 + Monitor (right of Stage) */
-.fp-bottom-right {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    flex-shrink: 0;
-    /* same width as two columns in the 5-col grid */
-    width: calc((100% - 4 * 6px) / 5 * 2 + 6px);
-    align-items: center;
-}
-
-.fp-horiz-pair {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 6px;
-    width: 100%;
-}
-
-.fp-monitor {
-    font-size: clamp(0.80rem, 1.8vw, 1rem);
-    color: #818cf8;
-    background: rgba(99, 102, 241, 0.07);
-    border: 1px dashed rgba(99, 102, 241, 0.22);
-    padding: 4px 5px;
-    border-radius: 6px;
-    text-align: center;
-    width: 100%;
-    min-height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Right sidebar: Cashier (top) + WC (bottom) */
-.fp-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.fp-sidebar-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1px;
-    border-radius: 6px;
-    width: 100%;
-    flex: 1;
-    font-size: 0.42rem;
-    text-align: center;
-    line-height: 1.3;
-    color: inherit;
-    padding: 3px 1px;
-}
-
-.fp-sidebar-item span:first-child {
-    font-size: clamp(0.65rem, 1.8vw, 0.82rem);
-}
-
-.fp-sidebar--cashier {
-    flex: 4;
-    /* Cashier: short (top) */
-    background: rgba(245, 158, 11, 0.07);
-    border: 1px solid rgba(245, 158, 11, 0.2);
-    color: #fbbf24;
-}
-
-.fp-sidebar--wc {
-    flex: 2;
-    /* WC: tall — matches the red line in floor plan */
-    background: rgba(59, 130, 246, 0.07);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    color: #60a5fa;
-}
-
-/* ══════════════════════════════════════════════════════
-   Staircase Divider  (Standard → VIP ชั้นลอย)
-══════════════════════════════════════════════════════ */
-
-.fp-stair-divider {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 6px 0;
-}
-
-.fp-stair-line {
-    flex: 1;
-    height: 1px;
-    background: rgba(168, 85, 247, 0.3);
-}
-
-.fp-stair-badge {
-    font-size: 0.7rem;
-    font-weight: 500;
-    color: #c084fc;
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px dashed rgba(168, 85, 247, 0.28);
-    padding: 5px 12px;
-    border-radius: 20px;
-    white-space: nowrap;
-}
-
-/* ══════════════════════════════════════════════════════
-   VIP Zone (ชั้นลอย)
-══════════════════════════════════════════════════════ */
-
-/* Plants + header centred */
-.fp-vip-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.fp-plant {
-    font-size: 1rem;
-}
-
-/* Row 4 split: [V12 V13] ··· [V14 V15] */
-.fp-vip-split {
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-}
-
-.fp-vip-split .fp-grid--2 {
-    width: calc(50% - 3px);
-}
-
-/* ── VIP main layout (tables + right railing structure) ── */
-.fp-vip-layout {
-    display: flex;
-    gap: 6px;
-    align-items: stretch;
-}
-
-.fp-vip-tables {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-width: 0;
-}
-
-/* Right-side railing/stairs column */
-.fp-vip-right {
-    width: 22px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    /* same gap as table rows */
-}
-
-/* Crosshatch railing/fence — matches sketch */
-.fp-vip-rail {
-    border-radius: 5px;
-    border: 1.5px solid rgba(168, 85, 247, 0.45);
-    background-color: rgba(168, 85, 247, 0.05);
-    background-image:
-        repeating-linear-gradient(45deg,
-            rgba(168, 85, 247, 0.28) 0px,
-            rgba(168, 85, 247, 0.28) 1.5px,
-            transparent 1.5px,
-            transparent 6px),
-        repeating-linear-gradient(-45deg,
-            rgba(168, 85, 247, 0.28) 0px,
-            rgba(168, 85, 247, 0.28) 1.5px,
-            transparent 1.5px,
-            transparent 6px);
-}
-
-/* Tall railing spans rows 1 + 2 (flex: 2 ≈ 2 row heights) */
-.fp-vip-rail--tall {
-    flex: 2;
-}
-
-/* Short railing spans row 4 (flex: 1 ≈ 1 row height) */
-.fp-vip-rail--short {
-    flex: 1;
-}
-
-/* Stairs block at row 3 level */
-.fp-vip-stairs-block {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(168, 85, 247, 0.1);
-    border: 1.5px solid rgba(168, 85, 247, 0.4);
-    border-radius: 6px;
-    color: #c084fc;
-    font-size: clamp(0.65rem, 2vw, 0.85rem);
-}
-
-/* ─── Responsive ──────────────────────────────────── */
-
-@media (max-width: 380px) {
-    .res-form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .fp-grid {
-        gap: 5px;
-    }
-
-    .fp-std-layout {
-        grid-template-columns: 1fr 26px;
-    }
-
-    .fp-bottom-area {
-        gap: 4px;
-    }
-
-    .fp-stair-badge {
-        font-size: 0.62rem;
-        padding: 4px 8px;
-    }
-}
-
-@media (min-width: 480px) {
-    .fp-grid {
-        gap: 8px;
-    }
-
-    .fp-std-layout {
-        grid-template-columns: 1fr 34px;
-    }
-}
-
-/* Legend */
-.fp-legend {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-}
-
-.fp-legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.fp-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    display: inline-block;
-    flex-shrink: 0;
-}
-
-.fp-dot--available {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.fp-dot--selected {
-    background: rgba(245, 158, 11, 0.5);
-    border: 1px solid var(--amber);
-}
-
-.fp-dot--occupied {
-    background: rgba(239, 68, 68, 0.25);
-    border: 1px solid rgba(239, 68, 68, 0.4);
-}
-
-/* ── Floor container ── */
-.fp-floor {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-
-/* ── Zone ── */
-.fp-zone {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+    gap: 12px;
     padding: 10px 0;
+    width: 100%;
+    margin: 0 auto;
 }
 
-.fp-zone-header {
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 5px;
-    display: inline-block;
-    align-self: flex-start;
-    margin-bottom: 2px;
-}
-
-.fp-zone-header--vip {
-    background: rgba(168, 85, 247, 0.15);
-    color: #c084fc;
-    border: 1px solid rgba(168, 85, 247, 0.25);
-}
-
-.fp-zone-header--std {
-    background: rgba(59, 130, 246, 0.12);
-    color: #60a5fa;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-/* Zone divider */
-.fp-divider {
-    height: 1px;
-    background: var(--border-subtle);
-    border-radius: 1px;
-    margin: 2px 0;
-}
-
-/* ── Grids ── */
-.fp-grid {
-    display: grid;
-    gap: 7px;
-}
-
-.fp-grid--4 {
-    grid-template-columns: repeat(4, 1fr);
-}
-
-.fp-grid--5 {
-    grid-template-columns: repeat(5, 1fr);
-}
-
-/* ── Row split (V12/V13 gap V14/V15) ── */
-.fp-row-split {
+/* ── Top Area ── */
+.fp-top-area {
     display: flex;
-    justify-content: space-between;
-    gap: 6px;
-}
-
-/* ── Mini grids (2-col or vertical stack) ── */
-.fp-mini-grid {
-    display: grid;
-    gap: 7px;
-}
-
-.fp-mini-grid--2col {
-    grid-template-columns: repeat(2, 1fr);
-}
-
-.fp-mini-grid--vert {
-    grid-template-columns: 1fr;
-}
-
-/* ── Standard zone top bar (header + welcome) ── */
-.fp-std-topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-}
-
-/* ── Standard zone layout (main + sidebar) ── */
-.fp-std-layout {
-    display: grid;
-    grid-template-columns: 1fr 32px;
-    gap: 6px;
-    align-items: start;
-}
-
-.fp-std-main {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
-/* ── Bottom area: T21/T22 | Stage | T23/T24 + Monitor ── */
+.fp-left-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25px;
+    flex-shrink: 0;
+}
+
+.fp-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--border-subtle);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-size: clamp(0.55rem, 1.8vw, 0.75rem);
+    font-weight: 600;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.fp-bar-nam {
+    height: 70px;
+    width: 100%;
+    /* Entrance (ทางเข้า) Color: Green */
+    background: rgba(34, 197, 94, 0.08);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.fp-text-vertical {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    letter-spacing: 3px;
+    font-weight: 700;
+}
+
+.fp-wall-line {
+    width: 2.5px;
+    background-color: rgba(255, 255, 255, 0.18);
+    flex: 1;
+    margin-top: 10px;
+    border-radius: 2px;
+}
+
+.fp-wall-line-bottom {
+    margin-top: 0;
+}
+
+/* ── Main Top Area ── */
+.fp-main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fp-top-headers {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    height: 28px;
+}
+
+.fp-counter {
+    flex: 1;
+    /* Cashier/Counter Color: Amber */
+    background: rgba(245, 158, 11, 0.08);
+    border-color: rgba(245, 158, 11, 0.3);
+    color: #fbbf24;
+}
+
+.fp-restroom {
+    width: calc(33.33% - 4px); /* matches right column roughly */
+    /* Restroom Color: Blue */
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+}
+
+.fp-top-tables {
+    display: flex;
+    gap: 6px;
+}
+
+.fp-t-grid {
+    flex: 1;
+    display: flex;
+    gap: 6px;
+}
+
+.fp-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.fp-t-right {
+    width: calc(33.33% - 4px);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fp-t-right-top {
+    display: flex;
+    gap: 6px;
+}
+
+.fp-tv {
+    flex: 1;
+    /* Spans down to align with T23 */
+    /* TV Color: Indigo */
+    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.3);
+    color: #818cf8;
+}
+
+.fp-stage {
+    min-height: 80px;
+    flex: 1;
+    /* Stage Color: Amber/Yellow */
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: #fbbf24;
+    font-size: clamp(0.7rem, 2vw, 0.9rem);
+}
+
+.fp-t-right-bottom {
+    display: flex;
+    gap: 6px;
+}
+.fp-t-right-bottom .fp-table {
+    flex: 1;
+}
+
+/* ── Middle Divider ── */
+.fp-divider {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+}
+
+.fp-hatch {
+    flex: 1;
+    height: 14px;
+    background-color: transparent;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 4px;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(168, 85, 247, 0.2) 3px, rgba(168, 85, 247, 0.2) 4px), repeating-linear-gradient(-45deg, transparent, transparent 3px, rgba(168, 85, 247, 0.2) 3px, rgba(168, 85, 247, 0.2) 4px);
+}
+
+.fp-stairs {
+    padding: 6px 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    /* Stairs Color: Purple */
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #c084fc;
+}
+
+/* ── Bottom Area ── */
 .fp-bottom-area {
     display: flex;
-    align-items: center;
-    gap: 6px;
+    gap: 10px;
 }
 
-.fp-bottom-right {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    align-items: center;
+.fp-v-grid-wrapper {
+    padding-top: 6px;
 }
 
-/* ── Sidebar (cashier + WC) ── */
-.fp-sidebar {
+.fp-v-grid {
     display: flex;
-    flex-direction: column;
     gap: 6px;
     justify-content: space-between;
-    height: 100%;
-    padding-top: 2px;
 }
 
-/* ── Table card ── */
+.fp-col-v11 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.fp-v11-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fp-v-bottom-two {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+/* ── Common Table Override ── */
 .fp-table {
     aspect-ratio: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 7px;
+    border-radius: 6px;
     border: 1.5px solid transparent;
     cursor: pointer;
     transition: all 0.15s ease;
     padding: 2px;
     gap: 1px;
     -webkit-tap-highlight-color: transparent;
-    min-width: 0;
-    min-height: 0;
+    width: 100%; /* Important to fill flex cell */
 }
 
 .fp-table-id {
-    font-size: clamp(0.72rem, 2vw, 0.8rem);
+    font-size: clamp(0.55rem, 2vw, 0.8rem);
     font-weight: 700;
     line-height: 1.1;
 }
 
 .fp-table-icon {
-    font-size: clamp(0.46rem, 1.5vw, 0.6rem);
+    font-size: clamp(0.42rem, 1.5vw, 0.6rem);
     line-height: 1;
 }
 
@@ -983,12 +601,7 @@
 .fp-table--available:hover:not(:disabled) {
     background: rgba(245, 158, 11, 0.12);
     border-color: rgba(245, 158, 11, 0.45);
-    transform: scale(1.06);
     box-shadow: 0 0 8px rgba(245, 158, 11, 0.15);
-}
-
-.fp-table--available:active:not(:disabled) {
-    transform: scale(0.96);
 }
 
 /* Selected */
@@ -999,149 +612,43 @@
     box-shadow: 0 0 10px rgba(245, 158, 11, 0.25);
 }
 
-.fp-table--selected:hover:not(:disabled) {
-    background: rgba(245, 158, 11, 0.26);
-    transform: scale(1.04);
-}
-
 /* Occupied */
 .fp-table--occupied {
-    background: rgba(239, 68, 68, 0.07);
-    border-color: rgba(239, 68, 68, 0.18);
-    color: rgba(239, 68, 68, 0.45);
+    background: transparent;
+    border-color: var(--border-subtle);
+    color: var(--text-secondary);
     cursor: not-allowed;
-    opacity: 0.55;
+    opacity: 0.5;
 }
 
-/* ── Amenity labels ── */
-.fp-amenity {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 7px;
-    gap: 2px;
-}
-
-.fp-amenity-icon {
-    font-size: clamp(0.7rem, 2vw, 0.9rem);
-    line-height: 1;
-}
-
-.fp-amenity-label {
-    font-size: clamp(0.45rem, 1.4vw, 0.6rem);
-    line-height: 1.1;
-    text-align: center;
-    white-space: nowrap;
-}
-
-/* Stairs (fits in 1 grid cell inside 4-col) */
-.fp-amenity--stairs {
-    aspect-ratio: 1;
-    background: rgba(168, 85, 247, 0.08);
-    border: 1px dashed rgba(168, 85, 247, 0.3);
-    color: #c084fc;
-}
-
-/* WELCOME (top-right of standard zone) */
-.fp-amenity--welcome {
-    background: rgba(34, 197, 94, 0.08);
-    border: 1px solid rgba(34, 197, 94, 0.2);
-    color: #4ade80;
-    padding: 4px 8px;
-    border-radius: 6px;
-    flex-direction: row;
-    gap: 4px;
-    white-space: nowrap;
-}
-
-.fp-amenity--welcome .fp-amenity-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-}
-
-/* Stage (center of bottom area) */
-.fp-amenity--stage {
-    flex: 1;
-    min-height: 56px;
-    background: rgba(251, 191, 36, 0.07);
-    border: 1px dashed rgba(251, 191, 36, 0.25);
-    color: #fbbf24;
-    align-self: stretch;
-    border-radius: 8px;
-}
-
-.fp-amenity--stage .fp-amenity-icon {
-    font-size: clamp(0.85rem, 2.5vw, 1.1rem);
-}
-
-.fp-amenity--stage .fp-amenity-label {
-    font-size: clamp(0.5rem, 1.5vw, 0.65rem);
-    font-weight: 700;
-}
-
-/* Monitor */
-.fp-amenity--monitor {
-    background: rgba(99, 102, 241, 0.07);
-    border: 1px dashed rgba(99, 102, 241, 0.2);
-    color: #818cf8;
-    padding: 3px 6px;
-    border-radius: 5px;
-    flex-direction: row;
-    gap: 3px;
-    width: 100%;
-}
-
-.fp-amenity--monitor .fp-amenity-label {
-    font-size: 0.55rem;
-}
-
-/* Cashier (top of sidebar) */
-.fp-amenity--cashier {
-    background: rgba(245, 158, 11, 0.07);
-    border: 1px solid rgba(245, 158, 11, 0.18);
-    color: #fbbf24;
-    width: 100%;
-    aspect-ratio: 0.7;
-    border-radius: 7px;
-}
-
-/* WC (bottom of sidebar) */
-.fp-amenity--wc {
-    background: rgba(59, 130, 246, 0.07);
-    border: 1px solid rgba(59, 130, 246, 0.18);
-    color: #60a5fa;
-    width: 100%;
-    aspect-ratio: 0.7;
-    border-radius: 7px;
-}
-
-/* ─── Responsive ─────────────────────────────────────────────────────── */
-
+/* ─── Responsive Adjustments ─── */
 @media (max-width: 380px) {
-    .res-form-row {
-        grid-template-columns: 1fr;
+    .fp-board {
+        gap: 8px;
     }
-
-    .fp-grid {
-        gap: 5px;
+    .fp-top-headers {
+        gap: 4px;
     }
-
-    .fp-std-layout {
-        grid-template-columns: 1fr 28px;
+    .fp-t-grid, .fp-v-grid {
+        gap: 4px;
+    }
+    .fp-col, .fp-t-right, .fp-t-right-top, .fp-t-right-bottom, .fp-v-bottom-two {
+        gap: 4px;
+    }
+    .fp-stairs {
+        padding: 4px 10px;
     }
 }
 
 @media (min-width: 480px) {
-    .fp-grid {
-        gap: 9px;
+    .fp-t-grid, .fp-v-grid {
+        gap: 8px;
     }
-
-    .fp-std-layout {
-        grid-template-columns: 1fr 36px;
+    .fp-col, .fp-t-right, .fp-t-right-top, .fp-t-right-bottom, .fp-v-bottom-two {
+        gap: 8px;
     }
 }
+
 
 /* ─── Booking Mode Selector ──────────────────────────────────────────────── */
 
