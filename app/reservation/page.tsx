@@ -449,10 +449,11 @@ export default function ReservationPage() {
                 maxTables={maxTables}
             />
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}>
                 <button
                     type="submit"
-                    className="btn btn-primary btn-full submit-res-btn"
+                    className="btn btn-primary submit-res-btn"
+                    style={{ minWidth: "280px" }}
                     disabled={!canSubmit || status === "loading"}
                 >
                     {status === "loading"
