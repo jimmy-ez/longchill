@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 interface MenuItem {
     id: string;
     name: string;
-    category: "food" | "drink";
+    category: "food" | "drink" | "mala";
     image_url: string | null;
     display_order: number;
     is_visible: boolean;
@@ -14,14 +14,15 @@ interface MenuItem {
 interface MenuSliderProps {
     foodItems: MenuItem[];
     drinkItems: MenuItem[];
+    malaItems: MenuItem[];
 }
 
-export default function MenuSlider({ foodItems, drinkItems }: MenuSliderProps) {
-    const [activeTab, setActiveTab] = useState<"food" | "drink">("food");
+export default function MenuSlider({ foodItems, drinkItems, malaItems }: MenuSliderProps) {
+    const [activeTab, setActiveTab] = useState<"food" | "drink" | "mala">("food");
     const [currentIndex, setCurrentIndex] = useState(0);
     const touchStartX = useRef<number | null>(null);
 
-    const activeItems = activeTab === "food" ? foodItems : drinkItems;
+    const activeItems = activeTab === "food" ? foodItems : activeTab === "drink" ? drinkItems : malaItems;
 
     const handleNext = useCallback(() => {
         if (activeItems.length === 0) return;
@@ -78,6 +79,16 @@ export default function MenuSlider({ foodItems, drinkItems }: MenuSliderProps) {
                 >
                     <span className="tab-icon">🍹</span>
                     เครื่องดื่ม
+                </button>
+                <button
+                    className={`tab-button ${activeTab === "mala" ? "active" : ""}`}
+                    onClick={() => {
+                        setActiveTab("mala");
+                        setCurrentIndex(0);
+                    }}
+                >
+                    <span className="tab-icon">🌶️</span>
+                    หม่าล่า
                 </button>
             </div>
 

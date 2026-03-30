@@ -43,7 +43,7 @@ create table public.menu_items (
   constraint menu_items_pkey primary key (id),
   constraint menu_items_category_check check (
     (
-      category = any (array['food'::text, 'drink'::text])
+      category = any (array['food'::text, 'drink'::text, 'mala'::text])
     )
   )
 ) TABLESPACE pg_default;

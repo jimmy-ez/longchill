@@ -9,7 +9,7 @@ export const fetchCache = "force-no-store";
 interface MenuItem {
     id: string;
     name: string;
-    category: "food" | "drink";
+    category: "food" | "drink" | "mala";
     image_url: string | null;
     display_order: number;
     is_visible: boolean;
@@ -29,7 +29,7 @@ export default async function MenuPage() {
         const { data: items } = await supabase
             .from("menu_items")
             .select("*")
-            .in("category", ["food", "drink"])
+            .in("category", ["food", "drink", "mala"])
             .eq("is_visible", true)
             .order("display_order");
 
@@ -40,6 +40,7 @@ export default async function MenuPage() {
 
     const foodItems = menuItems.filter((item) => item.category === "food" && item.image_url);
     const drinkItems = menuItems.filter((item) => item.category === "drink" && item.image_url);
+    const malaItems = menuItems.filter((item) => item.category === "mala" && item.image_url);
 
     return (
         <div className="menu-page mobile-layout">
@@ -55,7 +56,7 @@ export default async function MenuPage() {
                         <p>ยังไม่มีเมนูในขณะนี้</p>
                     </div>
                 ) : (
-                    <MenuSlider foodItems={foodItems} drinkItems={drinkItems} />
+                    <MenuSlider foodItems={foodItems} drinkItems={drinkItems} malaItems={malaItems} />
                 )}
             </section>
         </div>
