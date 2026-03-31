@@ -124,6 +124,9 @@ export default async function Home() {
             </a>
           </div>
         </div>
+
+        {/* Hidden H1 for SEO */}
+        <h1 className="sr-only">{"Longchill Mala & Bar (ลองชิลล์) — บาร์ ถนนติวานนท์ ปทุมธานี ที่ชิลล์ที่สุด พบกับหม่าล่ารสเด็ด เครื่องดื่มหลากหลาย และดนตรีสดในบรรยากาศสุดชิลล์"}</h1>
       </div>
     </div>
   );
