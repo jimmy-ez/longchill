@@ -63,7 +63,7 @@ export default function LoginPage() {
                         )}
                     </button> */}
 
-                    {/* <button
+                    <button
                         className="social-btn google-btn"
                         onClick={() => handleLogin('google')}
                         disabled={isLoading !== null}
@@ -76,7 +76,7 @@ export default function LoginPage() {
                                 ดำเนินการต่อด้วย Google
                             </>
                         )}
-                    </button> */}
+                    </button>
                 </div>
 
                 <div className="login-footer">
