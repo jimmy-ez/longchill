@@ -183,7 +183,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: error.message }, { status: 400 });
         }
 
-        // ── LINE Messaging API (fire-and-forget) ─────────────────────────
+        // ── LINE Messaging API ───────────────────────────────────────────
         const lineToken = process.env.LINE_MESSAGING_TOKEN;
         const lineGroupId = process.env.LINE_GROUP_ID;
         if (lineToken && lineGroupId) {
@@ -209,17 +209,26 @@ export async function POST(req: Request) {
                 modeLabel,
             ].join("\n");
 
-            fetch("https://api.line.me/v2/bot/message/push", {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${lineToken}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    to: lineGroupId,
-                    messages: [{ type: "text", text }],
-                }),
-            }).catch((err) => console.error("LINE Messaging API error:", err));
+            try {
+                const lineRes = await fetch("https://api.line.me/v2/bot/message/push", {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${lineToken}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        to: lineGroupId,
+                        messages: [{ type: "text", text }],
+                    }),
+                });
+                
+                if (!lineRes.ok) {
+                    const errText = await lineRes.text();
+                    console.error(`LINE API Error (${lineRes.status}):`, errText);
+                }
+            } catch (err) {
+                console.error("LINE Messaging API network error:", err);
+            }
         }
 
         return NextResponse.json({ success: true });
