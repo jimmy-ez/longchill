@@ -25,6 +25,17 @@ export const metadata: Metadata = {
     "ร้านนั่งชิลล์ ติวานนท์",
     "ร้านนั่งชิลล์ บ้านใหม่",
   ],
+  openGraph: {
+    title: "Longchill — Mala & Bar",
+    description: "บาร์ที่ชิลล์ที่สุดในปทุมธานี พบกับหม่าล่ารสเด็ด เครื่องดื่มหลากหลาย และดนตรีสด",
+    images: ["https://jwvzskjzgeqnkbndawso.supabase.co/storage/v1/object/public/etc/hero-bg-1.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Longchill — Mala & Bar",
+    description: "บาร์ที่ชิลล์ที่สุดในปทุมธานี พบกับหม่าล่ารสเด็ด เครื่องดื่มหลากหลาย และดนตรีสด",
+    images: ["https://jwvzskjzgeqnkbndawso.supabase.co/storage/v1/object/public/etc/hero-bg-1.png"],
+  },
 };
 
 export default function RootLayout({
