@@ -5,8 +5,7 @@ import "./page.css";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-    title: "Events — Longchill",
-    description: "อีเว้นท์และกิจกรรมสุดพิเศษที่ Longchill",
+    description: "อีเว้นท์และกิจกรรมสุดพิเศษที่ Longchill บาร์ที่คุณไม่ควรพลาดในย่านติวานนท์ นนทบุรี",
 };
 
 export default async function EventsPage() {

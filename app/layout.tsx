@@ -7,8 +7,19 @@ import { Providers } from "./providers";
 export const metadata: Metadata = {
   title: "Longchill — Mala & Bar",
   description:
-    "Longchill (ลองชิลล์) — Where great food meets good vibes. Craft cocktails, delicious bites, and the perfect chill atmosphere.",
-  keywords: ["longchill", "bar", "restaurant", "cocktails", "food", "chill"],
+    "Longchill Mala & Bar (ลองชิลล์) — บาร์ติวานนท์ นนทบุรี ที่ชิลล์ที่สุด พบกับหม่าล่ารสเด็ด เครื่องดื่มหลากหลาย และดนตรีสดในบรรยากาศสุดชิลล์",
+  keywords: [
+    "longchill",
+    "บาร์นนทบุรี",
+    "หม่าล่านนทบุรี",
+    "บาร์ติวานนท์",
+    "หม่าล่าติวานนท์",
+    "ร้านเหล้านนทบุรี",
+    "เบียร์นนทบุรี",
+    "เบียร์",
+    "mala",
+    "หม่าล่า",
+  ],
 };
 
 export default function RootLayout({

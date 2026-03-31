@@ -16,8 +16,7 @@ interface MenuItem {
 }
 
 export const metadata = {
-    title: "Menu — Longchill",
-    description: "Explore our full menu of craft cocktails, fine food, and more.",
+    description: "เลือกชมเมนูอาหาร หม่าล่า และเครื่องดื่มสุดพิเศษจาก Longchill บาร์ที่ชิลล์ที่สุดในย่านนนทบุรี ติวานนท์",
 };
 
 export default async function MenuPage() {
