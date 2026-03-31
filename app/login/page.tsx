@@ -48,7 +48,7 @@ export default function LoginPage() {
                         )}
                     </button>
 
-                    <button
+                    {/* <button
                         className="social-btn facebook-btn"
                         onClick={() => handleLogin('facebook')}
                         disabled={isLoading !== null}
@@ -61,7 +61,7 @@ export default function LoginPage() {
                                 ดำเนินการต่อด้วย Facebook
                             </>
                         )}
-                    </button>
+                    </button> */}
 
                     {/* <button
                         className="social-btn google-btn"
