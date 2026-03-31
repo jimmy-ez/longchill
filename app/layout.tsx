@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Longchill — Bar & Restaurant",
+  title: "Longchill — Mala & Bar",
   description:
     "Longchill (ลองชิลล์) — Where great food meets good vibes. Craft cocktails, delicious bites, and the perfect chill atmosphere.",
   keywords: ["longchill", "bar", "restaurant", "cocktails", "food", "chill"],
