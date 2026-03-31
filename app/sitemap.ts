@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@supabase/supabase-js";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = "https://longchill.co";
@@ -41,7 +41,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Dynamic event routes
     let eventRoutes: MetadataRoute.Sitemap = [];
     try {
-        const supabase = await createClient();
+        const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+        const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+        
+        // Use basic Supabase client without cookies for static generation compatibility
+        const supabase = createClient(supabaseUrl, supabaseKey);
+        
         const { data: events } = await supabase
             .from("events")
             .select("id, updated_at")
@@ -56,6 +61,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             }));
         }
     } catch (error) {
+        // Silently fails during build, but we have static routes
         console.error("Sitemap: Failed to fetch events:", error);
     }
 
