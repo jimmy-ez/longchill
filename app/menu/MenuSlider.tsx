@@ -18,11 +18,11 @@ interface MenuSliderProps {
 }
 
 export default function MenuSlider({ foodItems, drinkItems, malaItems }: MenuSliderProps) {
-    const [activeTab, setActiveTab] = useState<"food" | "drink" | "mala">("food");
+    const [activeTab, setActiveTab] = useState<"mala" | "food" | "drink">("mala");
     const [currentIndex, setCurrentIndex] = useState(0);
     const touchStartX = useRef<number | null>(null);
 
-    const activeItems = activeTab === "food" ? foodItems : activeTab === "drink" ? drinkItems : malaItems;
+    const activeItems = activeTab === "mala" ? malaItems : activeTab === "food" ? foodItems : drinkItems;
 
     const handleNext = useCallback(() => {
         if (activeItems.length === 0) return;
@@ -61,6 +61,16 @@ export default function MenuSlider({ foodItems, drinkItems, malaItems }: MenuSli
         <div className="menu-slider-container">
             <div className="tabs-container">
                 <button
+                    className={`tab-button ${activeTab === "mala" ? "active" : ""}`}
+                    onClick={() => {
+                        setActiveTab("mala");
+                        setCurrentIndex(0);
+                    }}
+                >
+                    <span className="tab-icon">🌶️</span>
+                    หม่าล่า
+                </button>
+                <button
                     className={`tab-button ${activeTab === "food" ? "active" : ""}`}
                     onClick={() => {
                         setActiveTab("food");
@@ -79,16 +89,6 @@ export default function MenuSlider({ foodItems, drinkItems, malaItems }: MenuSli
                 >
                     <span className="tab-icon">🍹</span>
                     เครื่องดื่ม
-                </button>
-                <button
-                    className={`tab-button ${activeTab === "mala" ? "active" : ""}`}
-                    onClick={() => {
-                        setActiveTab("mala");
-                        setCurrentIndex(0);
-                    }}
-                >
-                    <span className="tab-icon">🌶️</span>
-                    หม่าล่า
                 </button>
             </div>
 

@@ -9,7 +9,7 @@ export const fetchCache = "force-no-store";
 interface MenuItem {
     id: string;
     name: string;
-    category: "food" | "drink" | "mala";
+    category: "mala" | "food" | "drink";
     image_url: string | null;
     display_order: number;
     is_visible: boolean;
@@ -29,7 +29,7 @@ export default async function MenuPage() {
         const { data: items } = await supabase
             .from("menu_items")
             .select("*")
-            .in("category", ["food", "drink", "mala"])
+            .in("category", ["mala", "food", "drink"])
             .eq("is_visible", true)
             .order("display_order");
 
