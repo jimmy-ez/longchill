@@ -5,7 +5,7 @@ import "./page.css";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-    description: "อีเว้นท์และกิจกรรมสุดพิเศษที่ Longchill บาร์ที่คุณไม่ควรพลาดในย่านติวานนท์ นนทบุรี",
+    description: "อีเว้นท์และกิจกรรมสุดพิเศษที่ Longchill บาร์ที่คุณไม่ควรพลาดในย่านถนนติวานนท์ ปทุมธานี",
 };
 
 export default async function EventsPage() {

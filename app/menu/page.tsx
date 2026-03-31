@@ -16,7 +16,7 @@ interface MenuItem {
 }
 
 export const metadata = {
-    description: "เลือกชมเมนูอาหาร หม่าล่า และเครื่องดื่มสุดพิเศษจาก Longchill บาร์ที่ชิลล์ที่สุดในย่านนนทบุรี ติวานนท์",
+    description: "เลือกชมเมนูอาหาร หม่าล่า และเครื่องดื่มสุดพิเศษจาก Longchill บาร์ที่ชิลล์ที่สุดในย่านปทุมธานี ติวานนท์",
 };
 
 export default async function MenuPage() {
