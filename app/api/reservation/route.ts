@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { createClient } from "@supabase/supabase-js";
 
-const MAX_PER_TABLE = 4;
+const MAX_PER_TABLE = 5;
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -72,8 +72,13 @@ export async function POST(req: Request) {
         }
 
         // ── Validate time slots & cutoff times ──────────────────────────
-        const TABLE_TIME_MINUTES = [17 * 60, 17 * 60 + 30, 18 * 60, 18 * 60 + 30,
-        19 * 60, 19 * 60 + 30, 20 * 60];
+        const dayOfWeek = selectedDate.getDay();
+        const isWeekend = dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6;
+
+        const TABLE_TIME_MINUTES = isWeekend
+            ? [17 * 60, 17 * 60 + 30, 18 * 60, 18 * 60 + 30, 19 * 60, 19 * 60 + 30]
+            : [17 * 60, 17 * 60 + 30, 18 * 60, 18 * 60 + 30, 19 * 60, 19 * 60 + 30, 20 * 60];
+
         const WALK_IN_TIME_MINUTES = [17 * 60, 17 * 60 + 30, 18 * 60, 18 * 60 + 30,
         19 * 60, 19 * 60 + 30, 20 * 60, 20 * 60 + 30,
         21 * 60, 21 * 60 + 30, 22 * 60];
@@ -82,14 +87,15 @@ export async function POST(req: Request) {
             // ตรวจสอบ slot เวลา
             if (!TABLE_TIME_MINUTES.includes(bookingMinutes)) {
                 return NextResponse.json(
-                    { error: "เวลาที่เลือกไม่ถูกต้องสำหรับการจองแบบเลือกโต๊ะ (17:00–20:00)" },
+                    { error: isWeekend ? "เวลาที่เลือกไม่ถูกต้อง (ศุกร์-อาทิตย์ จองได้ถึง 19:30)" : "เวลาที่เลือกไม่ถูกต้อง (จันทร์-พฤหัส จองได้ถึง 20:00)" },
                     { status: 400 }
                 );
             }
-            // ตรวจสอบ cutoff วันนี้ (17:00 = 1020)
-            if (isToday && nowMinutes >= 17 * 60) {
+            // ตรวจสอบ cutoff วันนี้
+            const tableBookingCutoff = isWeekend ? 19 * 60 + 30 : 20 * 60;
+            if (isToday && nowMinutes >= tableBookingCutoff) {
                 return NextResponse.json(
-                    { error: "เลย 17:00 น. แล้ว ไม่สามารถจองแบบเลือกโต๊ะสำหรับวันนี้ได้" },
+                    { error: `เลยเวลา ${isWeekend ? "19:30" : "20:00"} น. แล้ว ไม่สามารถจองแบบเลือกโต๊ะสำหรับวันนี้ได้` },
                     { status: 400 }
                 );
             }

@@ -7,10 +7,8 @@ import { useRouter } from "next/navigation";
 import FloorPlan from "./FloorPlan";
 import "./page.css";
 
-const MAX_PER_TABLE = 4;
+const MAX_PER_TABLE = 5;
 
-// เวลาที่เลือกได้ แบบเลือกโต๊ะ: 17:00–20:00
-const TABLE_TIMES = ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"];
 // แบบไม่เลือกโต๊ะ: 17:00–22:00
 const WALK_IN_TIMES = [
     "17:00", "17:30", "18:00", "18:30", "19:00", "19:30",
@@ -79,8 +77,16 @@ export default function ReservationPage() {
     // ── ตรวจสอบเงื่อนไขวันที่เลือก ──────────────────────────────────────
     const isToday = formData.date === today;
 
-    // แบบเลือกโต๊ะ: ถ้าวันนี้ ต้องจองก่อน 17:00 (1020 นาที)
-    const tableBookingCutoffMinutes = 17 * 60; // 17:00 = 1020
+    // แบบเลือกโต๊ะ: วันจันทร์-พฤหัส 20:00 // ศุกร์-อาทิตย์ 19:30
+    const bookingDateObj = new Date(formData.date || today);
+    const dayOfWeek = bookingDateObj.getDay();
+    const isWeekend = dayOfWeek === 0 || dayOfWeek === 5 || dayOfWeek === 6;
+
+    const currentTableTimes = isWeekend
+        ? ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30"]
+        : ["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"];
+
+    const tableBookingCutoffMinutes = isWeekend ? 19 * 60 + 30 : 20 * 60;
     const isTodayTableBlocked = isToday && nowMinutes >= tableBookingCutoffMinutes;
 
     // แบบไม่เลือกโต๊ะ: ปิดจองวันนี้เมื่อถึง 22:00 (1320 นาที)
@@ -368,11 +374,11 @@ export default function ReservationPage() {
                 </div>
             </div>
 
-            {renderCommonFields(TABLE_TIMES, isTodayTableBlocked)}
+            {renderCommonFields(currentTableTimes, isTodayTableBlocked)}
 
             {isTodayTableBlocked && formData.date === today ? (
                 <div className="alert alert-warning" style={{ marginBottom: "12px" }}>
-                    ⏰ เลย 17:00 น. แล้ว ไม่สามารถจองแบบเลือกโต๊ะสำหรับวันนี้ได้ กรุณาเลือกวันอื่น
+                    ⏰ เลยเวลา {isWeekend ? "19:30" : "20:00"} น. แล้ว ไม่สามารถจองแบบเลือกโต๊ะสำหรับวันนี้ได้ กรุณาเลือกวันอื่น
                 </div>
             ) : null}
 
@@ -545,9 +551,9 @@ export default function ReservationPage() {
                     <h4>ข้อมูลติดต่อ &amp; เงื่อนไข</h4>
                     <ul className="res-info-list">
                         <li>🕒 แนะนำให้มาตรงเวลา หากมาช้าเกิน 15 นาทีทางร้านขออนุญาตปล่อยโต๊ะตามคิว</li>
-                        <li>🪑 แต่ละโต๊ะรองรับสูงสุด 4 ท่าน</li>
+                        <li>🪑 แต่ละโต๊ะรองรับสูงสุด 5 ท่าน</li>
                         <li>📅 จองล่วงหน้าได้สูงสุด 7 วัน</li>
-                        <li>🗓️ แบบเลือกโต๊ะ: จองวันนี้ต้องทำก่อน 17:00 น.</li>
+                        <li>🗓️ แบบเลือกโต๊ะ: วันจันทร์-พฤหัส จองได้ถึง 20:00 น. | ศุกร์-อาทิตย์ จองได้ถึง 19:30 น.</li>
                         <li>🚶 แบบไม่เลือกโต๊ะ: ปิดรับจองวันนี้เมื่อถึง 22:00 น.</li>
                     </ul>
                 </div>
