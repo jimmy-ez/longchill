@@ -4,10 +4,46 @@ import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 import FloorPlan from "./FloorPlan";
 import "./page.css";
 
 const MAX_PER_TABLE = 5;
+
+// ── กฎการเลือกโต๊ะที่ติดกัน ───────────────────────────────────────────────
+const ADJACENCY_MAP: Record<string, string[]> = {
+    // T Horizontal
+    "T5": ["T10"], "T10": ["T5", "T15"], "T15": ["T10", "T20"], "T20": ["T15", "T24"], "T24": ["T20"],
+    "T4": ["T9"], "T9": ["T4", "T14"], "T14": ["T9", "T19"], "T19": ["T14", "T23"], "T23": ["T19"],
+    "T3": ["T8"], "T8": ["T3", "T13"], "T13": ["T8", "T18"], "T18": ["T13"],
+    "T2": ["T7"], "T7": ["T2", "T12"], "T12": ["T7", "T17"], "T17": ["T12"],
+    "T1": ["T6"], "T6": ["T1", "T11"], "T11": ["T6", "T16"], "T16": ["T11"],
+    "T21": ["T22"], "T22": ["T21"],
+    // V Vertical
+    "V4": ["V3"], "V3": ["V4", "V2"], "V2": ["V3", "V1"], "V1": ["V2"],
+    "V8": ["V7"], "V7": ["V8", "V6"], "V6": ["V7", "V5"], "V5": ["V6"],
+    "V11": ["V10"], "V10": ["V11", "V9"], "V9": ["V10"],
+    "V15": ["V14"], "V14": ["V15", "V13"], "V13": ["V14", "V12"], "V12": ["V13"],
+};
+
+function isConnectedComponent(tables: string[]): boolean {
+    if (tables.length <= 1) return true;
+    const visited = new Set<string>();
+    const queue = [tables[0]];
+    visited.add(tables[0]);
+    let head = 0;
+    while (head < queue.length) {
+        const curr = queue[head++];
+        const neighbors = ADJACENCY_MAP[curr] || [];
+        for (const neighbor of neighbors) {
+            if (tables.includes(neighbor) && !visited.has(neighbor)) {
+                visited.add(neighbor);
+                queue.push(neighbor);
+            }
+        }
+    }
+    return visited.size === tables.length;
+}
 
 // แบบไม่เลือกโต๊ะ: 17:00–22:00
 const WALK_IN_TIMES = [
@@ -54,7 +90,6 @@ export default function ReservationPage() {
     const [loadingTables, setLoadingTables] = useState(false);
 
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-    const [errorMsg, setErrorMsg] = useState("");
     const [bookedTables, setBookedTables] = useState<string[]>([]);
 
     const [today] = useState(() => getTodayTH());
@@ -141,15 +176,39 @@ export default function ReservationPage() {
     };
 
     const handleToggleTable = (tableId: string) => {
-        setSelectedTables(prev => {
-            if (prev.includes(tableId)) {
-                return prev.filter(t => t !== tableId);
+        if (selectedTables.includes(tableId)) {
+            const newSelection = selectedTables.filter(t => t !== tableId);
+            if (newSelection.length > 1 && !isConnectedComponent(newSelection)) {
+                toast.error("การยกเลิกโต๊ะนี้ทำให้กลุ่มโต๊ะไม่ติดกัน ระบบจึงยกเลิกการเลือกโต๊ะใหม่ทั้งหมด");
+                setSelectedTables([]);
+                return;
             }
-            if (prev.length >= maxTables) {
-                return [...prev.slice(1), tableId];
+            setSelectedTables(newSelection);
+            return;
+        }
+
+        if (selectedTables.length === 0) {
+            setSelectedTables([tableId]);
+            return;
+        }
+
+        const isAdjacent = selectedTables.some(t => (ADJACENCY_MAP[t] || []).includes(tableId));
+        if (!isAdjacent) {
+            toast.error("กรุณาเลือกโต๊ะที่อยู่ติดกันตามข้อกำหนด (โซนธรรมดาต่อแนวนอน, โซน VIP ต่อแนวตั้ง)");
+            return;
+        }
+
+        if (selectedTables.length >= maxTables) {
+            const attemptSlice = [...selectedTables.slice(1), tableId];
+            if (isConnectedComponent(attemptSlice)) {
+                setSelectedTables(attemptSlice);
+            } else {
+                toast.error("เพื่อเลือกโต๊ะกลุ่มใหม่ กรุณายกเลิกโต๊ะที่เลือกไว้เดิมก่อน");
             }
-            return [...prev, tableId];
-        });
+            return;
+        }
+
+        setSelectedTables([...selectedTables, tableId]);
     };
 
     const canSubmit = selectedTables.length >= maxTables;
@@ -159,7 +218,6 @@ export default function ReservationPage() {
         e.preventDefault();
         if (!canSubmit) return;
         setStatus("loading");
-        setErrorMsg("");
 
         try {
             const res = await fetch("/api/reservation", {
@@ -195,9 +253,7 @@ export default function ReservationPage() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (err: unknown) {
             setStatus("error");
-            setErrorMsg(
-                err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
-            );
+            toast.error(err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
         }
     };
 
@@ -205,7 +261,6 @@ export default function ReservationPage() {
     const handleWalkInSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus("loading");
-        setErrorMsg("");
 
         try {
             const res = await fetch("/api/reservation", {
@@ -239,9 +294,7 @@ export default function ReservationPage() {
             window.scrollTo({ top: 0, behavior: "smooth" });
         } catch (err: unknown) {
             setStatus("error");
-            setErrorMsg(
-                err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง"
-            );
+            toast.error(err instanceof Error ? err.message : "เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง");
         }
     };
 
@@ -251,7 +304,6 @@ export default function ReservationPage() {
         setSelectedTables([]);
         setOccupiedTables([]);
         setBookedTables([]);
-        setErrorMsg("");
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
@@ -398,10 +450,6 @@ export default function ReservationPage() {
             onSubmit={handleWalkInSubmit}
             className="res-form animate-fade-in-up"
         >
-            {status === "error" && (
-                <div className="alert alert-error" style={{ marginBottom: "12px" }}>{errorMsg}</div>
-            )}
-
             {renderCommonFields(WALK_IN_TIMES, isTodayWalkInBlocked)}
 
             {isTodayWalkInBlocked && formData.date === today ? (
@@ -442,10 +490,6 @@ export default function ReservationPage() {
                 <span>🕐 {formData.time} น.</span>
                 <span>👥 {formData.party_size} คน</span>
             </div>
-
-            {status === "error" && (
-                <div className="alert alert-error">{errorMsg}</div>
-            )}
 
             <FloorPlan
                 occupiedTables={occupiedTables}
