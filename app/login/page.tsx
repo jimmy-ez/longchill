@@ -42,13 +42,13 @@ export default function LoginPage() {
                             <span className="spinner small"></span>
                         ) : (
                             <>
-                                <span className="social-icon">💬</span>
+                                <Image src="/icons/line.png" alt="LINE" width={24} height={24} className="social-icon" />
                                 ดำเนินการต่อด้วย LINE
                             </>
                         )}
                     </button>
 
-                    {/* <button
+                    <button
                         className="social-btn facebook-btn"
                         onClick={() => handleLogin('facebook')}
                         disabled={isLoading !== null}
@@ -57,13 +57,13 @@ export default function LoginPage() {
                             <span className="spinner small"></span>
                         ) : (
                             <>
-                                <span className="social-icon">f</span>
+                                <Image src="/icons/facebook.png" alt="Facebook" width={24} height={24} className="social-icon" />
                                 ดำเนินการต่อด้วย Facebook
                             </>
                         )}
                     </button>
 
-                    <button
+                    {/* <button
                         className="social-btn google-btn"
                         onClick={() => handleLogin('google')}
                         disabled={isLoading !== null}
@@ -72,7 +72,7 @@ export default function LoginPage() {
                             <span className="spinner small login-spinner-dark"></span>
                         ) : (
                             <>
-                                <span className="social-icon">G</span>
+                                <Image src="/icons/google.png" alt="Google" width={24} height={24} className="social-icon" />
                                 ดำเนินการต่อด้วย Google
                             </>
                         )}
