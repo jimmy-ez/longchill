@@ -437,7 +437,8 @@
 }
 
 .fp-restroom {
-    width: calc(33.33% - 4px); /* matches right column roughly */
+    width: calc(33.33% - 4px);
+    /* matches right column roughly */
     /* Restroom Color: Blue */
     background: rgba(59, 130, 246, 0.08);
     border-color: rgba(59, 130, 246, 0.3);
@@ -483,6 +484,29 @@
     color: #818cf8;
 }
 
+.fp-vip-tv-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 28px;
+    flex-shrink: 0;
+    /* Offset to align vertically between V13 & V14 (2nd and 3rd from bottom) */
+    padding-top: 25%;
+    padding-bottom: 25%;
+}
+
+.fp-tv-vip {
+    flex: none;
+    aspect-ratio: unset;
+    width: 100%;
+    padding: 6px 2px;
+    min-height: 150px;
+    font-size: clamp(0.45rem, 1.2vw, 0.6rem);
+    /* writing-mode: vertical-rl; */
+    /* transform: rotate(180deg); */
+    letter-spacing: 1px;
+}
+
 .fp-stage {
     min-height: 80px;
     flex: 1;
@@ -497,6 +521,7 @@
     display: flex;
     gap: 6px;
 }
+
 .fp-t-right-bottom .fp-table {
     flex: 1;
 }
@@ -577,7 +602,8 @@
     padding: 2px;
     gap: 1px;
     -webkit-tap-highlight-color: transparent;
-    width: 100%; /* Important to fill flex cell */
+    width: 100%;
+    /* Important to fill flex cell */
 }
 
 .fp-table-id {
@@ -626,25 +652,41 @@
     .fp-board {
         gap: 8px;
     }
+
     .fp-top-headers {
         gap: 4px;
     }
-    .fp-t-grid, .fp-v-grid {
+
+    .fp-t-grid,
+    .fp-v-grid {
         gap: 4px;
     }
-    .fp-col, .fp-t-right, .fp-t-right-top, .fp-t-right-bottom, .fp-v-bottom-two {
+
+    .fp-col,
+    .fp-t-right,
+    .fp-t-right-top,
+    .fp-t-right-bottom,
+    .fp-v-bottom-two {
         gap: 4px;
     }
+
     .fp-stairs {
         padding: 4px 10px;
     }
 }
 
 @media (min-width: 480px) {
-    .fp-t-grid, .fp-v-grid {
+
+    .fp-t-grid,
+    .fp-v-grid {
         gap: 8px;
     }
-    .fp-col, .fp-t-right, .fp-t-right-top, .fp-t-right-bottom, .fp-v-bottom-two {
+
+    .fp-col,
+    .fp-t-right,
+    .fp-t-right-top,
+    .fp-t-right-bottom,
+    .fp-v-bottom-two {
         gap: 8px;
     }
 }

@@ -104,7 +104,7 @@ export default function FloorPlan({
                             <div className="fp-t-right">
                                 <div className="fp-t-right-top">
                                     <div className="fp-col">{T("T23")}{T("T24")}</div>
-                                    <div className="fp-box fp-tv">ทีวี</div>
+                                    <div className="fp-box fp-tv">TV</div>
                                 </div>
                                 <div className="fp-box fp-stage">เวที</div>
                                 <div className="fp-t-right-bottom">
@@ -144,6 +144,9 @@ export default function FloorPlan({
                             </div>
                             <div className="fp-col">
                                 {T("V15")}{T("V14")}{T("V13")}{T("V12")}
+                            </div>
+                            <div className="fp-vip-tv-col">
+                                <div className="fp-box fp-tv fp-tv-vip">TV</div>
                             </div>
                         </div>
                     </div>
