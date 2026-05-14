@@ -95,15 +95,15 @@ export default function FloorPlan({
 
                         <div className="fp-top-tables">
                             <div className="fp-t-grid">
-                                <div className="fp-col">{T("T5")}{T("T4")}{T("T3")}{T("T2")}{T("T1")}</div>
-                                <div className="fp-col">{T("T10")}{T("T9")}{T("T8")}{T("T7")}{T("T6")}</div>
-                                <div className="fp-col">{T("T15")}{T("T14")}{T("T13")}{T("T12")}{T("T11")}</div>
-                                <div className="fp-col">{T("T20")}{T("T19")}{T("T18")}{T("T17")}{T("T16")}</div>
+                                <div className="fp-col">{T("T1")}{T("T5")}{T("T9")}{T("T13")}{T("T17")}</div>
+                                <div className="fp-col">{T("T2")}{T("T6")}{T("T10")}{T("T14")}{T("T18")}</div>
+                                <div className="fp-col">{T("T3")}{T("T7")}{T("T11")}{T("T15")}{T("T19")}</div>
+                                <div className="fp-col">{T("T4")}{T("T8")}{T("T12")}{T("T16")}{T("T20")}</div>
                             </div>
 
                             <div className="fp-t-right">
                                 <div className="fp-t-right-top">
-                                    <div className="fp-col">{T("T24")}{T("T23")}</div>
+                                    <div className="fp-col">{T("T23")}{T("T24")}</div>
                                     <div className="fp-box fp-tv">ทีวี</div>
                                 </div>
                                 <div className="fp-box fp-stage">เวที</div>
