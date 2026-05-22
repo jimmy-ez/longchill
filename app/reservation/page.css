@@ -491,8 +491,8 @@
     width: 28px;
     flex-shrink: 0;
     /* Offset to align vertically between V13 & V14 (2nd and 3rd from bottom) */
-    padding-top: 25%;
-    padding-bottom: 25%;
+    padding-top: 15%;
+    padding-bottom: 15%;
 }
 
 .fp-tv-vip {
@@ -688,6 +688,11 @@
     .fp-t-right-bottom,
     .fp-v-bottom-two {
         gap: 8px;
+    }
+
+    .fp-vip-tv-col {
+        padding-top: 25%;
+        padding-bottom: 25%;
     }
 }
 

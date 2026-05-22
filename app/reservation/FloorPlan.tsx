@@ -155,10 +155,10 @@ export default function FloorPlan({
                             <div className="fp-col"
                                 style={{
                                     justifyContent: "space-between",
-                                    height: "61%"
+                                    height: "100%",
                                 }}
                             >
-                                {T("V7")}{T("V8")}
+                                <div className="fp-table"></div>{T("V7")}{T("V8")}
                             </div>
                             <div className="fp-col"
                                 style={{
