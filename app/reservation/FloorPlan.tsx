@@ -129,21 +129,72 @@ export default function FloorPlan({
                     </div>
 
                     <div className="fp-main-area fp-v-grid-wrapper">
-                        <div className="fp-v-grid">
-                            <div className="fp-col">
-                                {T("V4")}{T("V3")}{T("V2")}{T("V1")}
+                        <div
+                            className="fp-v-grid"
+                            style={{
+                                alignItems: "flex-end"
+                            }}
+                        >
+                            <div
+                                className="fp-col"
+                                style={{
+                                    height: "100%",
+                                    justifyContent: "space-between"
+                                }}
+                            >
+                                {T("V3")}{T("V2")}{T("V1")}
                             </div>
-                            <div className="fp-col">
-                                {T("V8")}{T("V7")}{T("V6")}{T("V5")}
+                            <div className="fp-col"
+                                style={{
+                                    height: "100%",
+                                    justifyContent: "space-between"
+                                }}
+                            >
+                                {T("V6")}{T("V5")}{T("V4")}
                             </div>
-                            <div className="fp-col fp-col-v11">
-                                <div className="fp-v11-wrapper">{T("V11")}</div>
-                                <div className="fp-v-bottom-two">
-                                    {T("V10")}{T("V9")}
+                            <div className="fp-col"
+                                style={{
+                                    justifyContent: "space-between",
+                                    height: "61%"
+                                }}
+                            >
+                                {T("V7")}{T("V8")}
+                            </div>
+                            <div className="fp-col"
+                                style={{
+                                    height: "100%",
+                                    justifyContent: "space-between"
+                                }}
+                            >
+                                {T("V11")}{T("V10")}{T("V9")}
+                            </div>
+                            <div className="fp-col"
+                                style={{
+                                    height: "100%",
+                                    justifyContent: "space-between"
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        height: "50%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        gap: 8,
+                                    }}
+                                >
+                                    {T("V15")}{T("V14")}
                                 </div>
-                            </div>
-                            <div className="fp-col">
-                                {T("V15")}{T("V14")}{T("V13")}{T("V12")}
+                                <div
+                                    style={{
+                                        height: "50%",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        justifyContent: "flex-end",
+                                        gap: 8,
+                                    }}
+                                >
+                                    {T("V13")}{T("V12")}
+                                </div>
                             </div>
                             <div className="fp-vip-tv-col">
                                 <div className="fp-box fp-tv fp-tv-vip">TV</div>
